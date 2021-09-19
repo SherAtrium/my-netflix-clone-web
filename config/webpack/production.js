@@ -1,13 +1,14 @@
 const paths = require('../paths');
-const { merge } = require('webpack-merge');
 const common = require('./common');
-
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-// const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
-const ImageminPlugin = require('imagemin-webpack-plugin').default;
+const { merge } = require('webpack-merge');
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
 module.exports = merge(common, {
   mode: 'production',
+
+  target: 'browserslist',
+
+  devtool: false,
 
   entry: {
     index: {
@@ -17,57 +18,10 @@ module.exports = merge(common, {
     react: ['react', 'react-dom', 'prop-types'],
   },
 
-  devtool: false,
-
   output: {
     filename: 'js/[name].[contenthash].bundle.js',
     publicPath: './',
   },
-
-  module: {
-    rules: [
-      // CSS, SASS
-      {
-        test: /\.(c|sa|sc)ss$/i,
-        exclude: /\.module\.(c|sa|sc)ss$/i,
-        use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: { importLoaders: 1, sourceMap: false },
-          },
-          'sass-loader',
-        ],
-      },
-      // SCSS MODULES
-      {
-        test: /\.module\.(c|sa|sc)ss$/i,
-        use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 2,
-              sourceMap: false,
-              modules: { localIdentName: '[name]-[local]-[hash:base64:3]' },
-            },
-          },
-          'sass-loader',
-        ],
-      },
-    ],
-  },
-
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: 'css/[name].[contenthash].css',
-      chunkFilename: 'css/[id].css',
-    }),
-
-    new ImageminPlugin({
-      test: /\.(jpe?g|png|gif|svg)$/i,
-    }),
-  ],
 
   optimization: {
     runtimeChunk: 'single',
@@ -78,8 +32,18 @@ module.exports = merge(common, {
           name: 'vendors',
           chunks: 'all',
         },
+        styles: {
+          name: "styles",
+          type: "css/mini-extract",
+          chunks: "all",
+          enforce: true,
+        },
       },
     },
+    minimizer: [
+      `...`,
+      new CssMinimizerPlugin(),
+    ],
   },
 
   performance: {

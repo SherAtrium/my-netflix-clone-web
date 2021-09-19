@@ -2,9 +2,18 @@ const paths = require('../paths');
 
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-// const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const ImageminPlugin = require('imagemin-webpack-plugin').default;
+const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
 
+const isDevMode = process.env.NODE_ENV === 'development';
+
+const EXT_HTML = /\.html$/i;
+const EXT_JSX = /\.m?jsx?$/i;
+const EXT_CSS_SASS_SCSS = /\.(c|sa|sc)ss$/i;
+const EXT_IMAGES = /\.(jpe?g|png|gif|svg)$/i;
+const EXT_MODULE_CSS_SASS_SCSS = /\.module\.(c|sa|sc)ss$/i;
+const EXT_STATIC_FILES = /\.(jpe?g|png|gif|svg|eot|ttf|woff2?)$/i;
 
 module.exports = {
   entry: `${paths.src}/index.js`,
@@ -42,46 +51,49 @@ module.exports = {
     rules: [
       // JavaScript, React
       {
-        test: /\.m?jsx?$/i,
+        test: EXT_JSX,
         exclude: /node_modules/,
         use: 'babel-loader',
       },
       // CSS, SASS
       {
-        test: /\.(c|sa|sc)ss$/i,
-        exclude: /\.module\.(c|sa|sc)ss$/i,
+        test: EXT_CSS_SASS_SCSS,
+        exclude: EXT_MODULE_CSS_SASS_SCSS,
         use: [
-          MiniCssExtractPlugin.loader,
+          isDevMode ? 'style-loader' : MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
-            options: { importLoaders: 1, sourceMap: true },
+            options: { importLoaders: 1, sourceMap: isDevMode },
           },
+          'postcss-loader',
           'sass-loader',
         ],
       },
       // SCSS MODULES
       {
-        test: /\.module\.(c|sa|sc)ss$/i,
+        test: EXT_MODULE_CSS_SASS_SCSS,
         use: [
-          MiniCssExtractPlugin.loader,
+          isDevMode ? 'style-loader' : MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
-              importLoaders: 2,
-              sourceMap: true,
-              modules: { localIdentName: '[name]-[local]-[hash:base64:3]' },
+              importLoaders: 1,
+              sourceMap: isDevMode,
+              modules: { getLocalIdent: getCSSModuleLocalIdent },
             },
           },
+          'postcss-loader',
           'sass-loader',
         ],
       },
       // static files
       {
-        test: /\.(jpe?g|png|gif|svg|eot|ttf|woff2?)$/i,
+        test: EXT_STATIC_FILES,
         type: 'asset',
       },
+      // html files
       {
-        test: /\.html$/,
+        test: EXT_HTML,
         loader: 'html-loader',
       },
     ],
@@ -90,9 +102,15 @@ module.exports = {
   plugins: [
     new webpack.ProgressPlugin(),
 
+    new webpack.ProvidePlugin({ React: 'react' }),
+
+    isDevMode
+      ? new webpack.HotModuleReplacementPlugin()
+      : new ImageminPlugin({ test: EXT_IMAGES }),
+
     new MiniCssExtractPlugin({
       filename: 'css/[name].[contenthash].css',
-      chunkFilename: 'css/[id].css',
+      chunkFilename: 'css/[id].[contenthash].css',
     }),
 
     new HtmlWebpackPlugin({
@@ -111,10 +129,6 @@ module.exports = {
         title: 'ReactJS - Movies',
         url: 'https://example.com',
       },
-    }),
-
-    new webpack.ProvidePlugin({
-      React: 'react',
     }),
   ],
 };
