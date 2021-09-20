@@ -4,9 +4,9 @@ const { merge } = require('webpack-merge');
 
 module.exports = merge(common, {
   mode: 'development',
-  
+
   target: 'web',
-  
+
   devtool: 'eval-cheap-source-map',
 
   devServer: {

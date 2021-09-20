@@ -1,7 +1,6 @@
-const paths = require('../paths');
 const common = require('./common');
 const { merge } = require('webpack-merge');
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 module.exports = merge(common, {
   mode: 'production',
@@ -20,17 +19,14 @@ module.exports = merge(common, {
           chunks: 'all',
         },
         styles: {
-          name: "styles",
-          type: "css/mini-extract",
-          chunks: "all",
+          name: 'styles',
+          type: 'css/mini-extract',
+          chunks: 'all',
           enforce: true,
         },
       },
     },
-    minimizer: [
-      `...`,
-      new CssMinimizerPlugin(),
-    ],
+    minimizer: [`...`, new CssMinimizerPlugin()],
   },
 
   performance: {

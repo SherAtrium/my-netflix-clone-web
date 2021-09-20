@@ -104,9 +104,7 @@ module.exports = {
 
     new webpack.ProvidePlugin({ React: 'react' }),
 
-    isDevMode
-      ? new webpack.HotModuleReplacementPlugin()
-      : new ImageminPlugin({ test: EXT_IMAGES }),
+    isDevMode ? new webpack.HotModuleReplacementPlugin() : new ImageminPlugin({ test: EXT_IMAGES }),
 
     new MiniCssExtractPlugin({
       filename: 'css/[name].[contenthash].css',

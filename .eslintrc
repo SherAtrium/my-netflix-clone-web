@@ -24,7 +24,6 @@
       "keyword-spacing": "error", // enforce consistent spacing before and after keywords
       "space-infix-ops": "error", // requires a space after each operator 2+2 -> 2 + 2
       "semi": ["error", "always"], // needs a semicolon
-      "quotes": ["error", "single"], // single quotes
       "space-before-blocks": "error", // Require Space Before Blocks .. }else{ .. -> } else {
       "comma-style": ["error", "last"], // you don't enter before comma (,) but after you can
       "no-unexpected-multiline": "error", // don't multiline the code after return or etc.
@@ -38,6 +37,7 @@
       "multiline-comment-style": ["error", "starred-block"], // comment guide
       "comma-spacing": ["error", { "before": false, "after": true }], // spaces in array [1 , 2] -> [1, 2]
       "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 1 }], // No empty line more than 1
+      "quotes": ["error", "single", { "allowTemplateLiterals": true }], // single quotes
       "space-before-function-paren": ["error", { "anonymous": "never", "named": "never", "asyncArrow": "always" }] // spacing after word function
     }
 }
