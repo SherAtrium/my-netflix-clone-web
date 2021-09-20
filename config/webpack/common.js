@@ -20,7 +20,7 @@ module.exports = {
 
   output: {
     path: paths.build,
-    filename: 'js/[name].[contenthash].js',
+    filename: 'js/[name].[contenthash].bundle.js',
     publicPath: '/',
     clean: true,
     crossOriginLoading: 'anonymous',

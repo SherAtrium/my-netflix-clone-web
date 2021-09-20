@@ -1,0 +1,43 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": [
+        // "plugin:react/recommended"
+    ],
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react"
+    ],
+    "rules": {
+      "indent": ["error", 2], // changing Tab from 4 to 2 spaces.
+      "semi-spacing": "error", // write semicolon without a space before
+      "arrow-spacing": "error", // enforce consistent spacing before and after arrow fn
+      "no-extra-semi": "error", // don't write semicolon when it doesn't need
+      "keyword-spacing": "error", // enforce consistent spacing before and after keywords
+      "space-infix-ops": "error", // requires a space after each operator 2+2 -> 2 + 2
+      "semi": ["error", "always"], // needs a semicolon
+      "quotes": ["error", "single"], // single quotes
+      "space-before-blocks": "error", // Require Space Before Blocks .. }else{ .. -> } else {
+      "comma-style": ["error", "last"], // you don't enter before comma (,) but after you can
+      "no-unexpected-multiline": "error", // don't multiline the code after return or etc.
+      "newline-per-chained-call": "error", // in Promises each chained (.then) shuld be in newline
+      "max-len": ["error", { "code": 100 }], // max characters in one line must be 100.
+      "spaced-comment": ["error", "always"], // required a space before the each first word of comment
+      "space-in-parens": ["error", "never"], // spaces in parens ( some ) -> (some)
+      "array-bracket-spacing": ["error", "never"], // spaces in array [ 1, 2, 3 ] -> [1, 2, 3]
+      "object-curly-spacing": ["error", "always"], // spaces in object {key: 1} -> { key: 1 }
+      "comma-dangle": ["error", "always-multiline"], // in each line of code in obj you must add comma
+      "multiline-comment-style": ["error", "starred-block"], // comment guide
+      "comma-spacing": ["error", { "before": false, "after": true }], // spaces in array [1 , 2] -> [1, 2]
+      "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 1 }], // No empty line more than 1
+      "space-before-function-paren": ["error", { "anonymous": "never", "named": "never", "asyncArrow": "always" }] // spacing after word function
+    }
+}

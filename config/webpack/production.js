@@ -10,19 +10,6 @@ module.exports = merge(common, {
 
   devtool: false,
 
-  entry: {
-    index: {
-      import: `${paths.src}/index.js`,
-      dependOn: ['react'],
-    },
-    react: ['react', 'react-dom', 'prop-types'],
-  },
-
-  output: {
-    filename: 'js/[name].[contenthash].bundle.js',
-    publicPath: './',
-  },
-
   optimization: {
     runtimeChunk: 'single',
     splitChunks: {

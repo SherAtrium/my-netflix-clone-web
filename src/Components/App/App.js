@@ -5,7 +5,7 @@ const App = () => {
     <div className={Styles.container}>
       Hello React!
     </div>
-  )
+  );
 };
 
 export default App;
