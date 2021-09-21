@@ -16,7 +16,7 @@ const EXT_MODULE_CSS_SASS_SCSS = /\.module\.(c|sa|sc)ss$/i;
 const EXT_STATIC_FILES = /\.(jpe?g|png|gif|svg|eot|ttf|woff2?)$/i;
 
 module.exports = {
-  entry: `${paths.src}/index.jsx`,
+  entry: `${paths.src}/index.js`,
 
   output: {
     path: paths.build,

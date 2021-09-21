@@ -4,8 +4,9 @@ module.exports = {
     es2021: true,
   },
   extends: [
-    'plugin:react/recommended',
     'airbnb',
+    'plugin:react/recommended',
+    'plugin:prettier/recommended',
   ],
   parserOptions: {
     ecmaFeatures: {
@@ -16,7 +17,6 @@ module.exports = {
   },
   plugins: ['react'],
   rules: {
-    'no-console': 'off',
-    'linebreak-style': ['error', 'never'],
+    'react/react-in-jsx-scope': 'off',
   },
 };
