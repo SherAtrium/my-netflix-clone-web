@@ -1,4 +1,3 @@
-import React from 'react';
 import Styles from './App.module.scss';
 
 console.log('one');

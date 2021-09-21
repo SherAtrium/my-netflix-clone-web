@@ -14,10 +14,9 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: 'module',
   },
-  plugins: [
-    'react',
-  ],
+  plugins: ['react'],
   rules: {
     'no-console': 'off',
+    'linebreak-style': ['error', 'never'],
   },
 };
