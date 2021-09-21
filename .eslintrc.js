@@ -15,8 +15,10 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: 'module',
   },
-  plugins: ['react'],
+  plugins: ['react', 'prettier'],
   rules: {
-    'react/react-in-jsx-scope': 'off',
+    'linebreak-style': ['off'],
+    'react/react-in-jsx-scope': ['off'],
+    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
   },
 };
