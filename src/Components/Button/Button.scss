@@ -1,0 +1,71 @@
+@import "../../MainStyles/variables";
+
+.button {
+  height: 2.5rem;
+  padding: 0 1rem;
+
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: $borderRadius_4;
+
+  font-size: 16px;
+  font-weight: 600;
+  white-space: nowrap;
+  text-transform: uppercase;
+
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.button:disabled {
+  cursor: auto;
+}
+
+
+// BUTTON RED
+.btnRed {
+  color: $red;
+}
+
+.btnRed:hover {
+}
+
+.btnRed:disabled {
+}
+
+
+// BUTTON OUTLINE RED
+.btnOutlineRed {
+}
+
+.btnOutlineRed:hover {
+}
+
+.btnOutlineRed:disabled {
+}
+
+
+// BUTTON OUTLINE RED
+.btnTransparent {
+}
+
+.btnTransparent:hover {
+}
+
+.btnTransparent:disabled {
+}
+
+
+// BUTTON SIZES
+.btnLg {
+  width: 13rem;
+  height: 3rem;
+}
+
+.btnMd {
+  width: 11.5rem;
+}
+
+.btnSm {
+  width: 9rem;
+}

@@ -7,6 +7,7 @@
 	overflow: hidden;
 	box-sizing: border-box;
 	background-color: $black;
+	z-index: 1;
 
 	> img {
 		position: absolute;
@@ -14,10 +15,32 @@
 		left: 0;
 		width: 100%;
 		height: 100%;
-		object-fit: cover;
 
 		opacity: 0.3;
+		object-fit: cover;
+
+		filter: blur(4px);
 		mix-blend-mode: normal;
+
+		-webkit-animation: bg-fade-out 1s ease-in-out;
+		-o-animation: bg-fade-out 1s ease-in-out;
+		animation: bg-fade-out 1s ease-in-out;
+
+		z-index: -1;
+	}
+
+}
+
+
+@keyframes bg-fade-out {
+	0% {
+		opacity: .5;
+		transform: scale(2);
+		filter: blur(1px);
+	}
+	100% {
+		opacity: .3;
+		transform: scale(1);
 		filter: blur(4px);
 	}
 }
