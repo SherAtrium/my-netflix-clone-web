@@ -1,71 +1,89 @@
 @import "../../MainStyles/variables";
 
 .button {
-  height: 2.5rem;
-  padding: 0 1rem;
+	height: 2.5rem;
+	padding: 0 1rem;
 
-  border: none;
-  outline: none;
-  cursor: pointer;
-  border-radius: $borderRadius_4;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	border-radius: $borderRadius_4;
 
-  font-size: 16px;
-  font-weight: 600;
-  white-space: nowrap;
-  text-transform: uppercase;
+	font-size: 16px;
+	font-weight: 500;
+	white-space: nowrap;
+	text-transform: uppercase;
 
-  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+	transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
 .button:disabled {
-  cursor: auto;
-}
-
-
-// BUTTON RED
-.btnRed {
-  color: $red;
-}
-
-.btnRed:hover {
-}
-
-.btnRed:disabled {
-}
-
-
-// BUTTON OUTLINE RED
-.btnOutlineRed {
-}
-
-.btnOutlineRed:hover {
-}
-
-.btnOutlineRed:disabled {
+	cursor: not-allowed;
 }
 
 
 // BUTTON OUTLINE RED
 .btnTransparent {
+	color: $red;
+	font-weight: 600;
+	background: $alpha_gray_primary;
 }
 
 .btnTransparent:hover {
+	color: $red_hover;
+	background-color: $alpha_gray_secondary;
 }
 
 .btnTransparent:disabled {
+	color: $red_dark;
+	background-color: $alpha_gray_primary;
+}
+
+
+// BUTTON RED
+.btnRed {
+	color: $white;
+	background-color: $red;
+}
+
+.btnRed:hover {
+	background-color: $red_hover;
+}
+
+.btnRed:disabled {
+	color: $red_dark;
+	background-color: $red;
+}
+
+
+// BUTTON OUTLINE RED
+.btnOutlineRed {
+	color: $red;
+	border: 2px solid $red;
+	background-color: transparent;
+}
+
+.btnOutlineRed:hover {
+	color: $red_hover;
+	border: 2px solid $red_hover;
+}
+
+.btnOutlineRed:disabled {
+	color: $red_dark;
+	border: 2px solid $red_dark;
 }
 
 
 // BUTTON SIZES
 .btnLg {
-  width: 13rem;
-  height: 3rem;
+	width: 13rem;
+	height: 3rem;
 }
 
 .btnMd {
-  width: 11.5rem;
+	width: 11.5rem;
 }
 
 .btnSm {
-  width: 9rem;
+	width: 9rem;
 }

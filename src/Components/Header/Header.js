@@ -11,31 +11,17 @@ const Header = () => {
       <img src={headerImg} alt='Background collage' />
 
       <div className='container'>
-        <Logotype />
-        <Button
-          onClick={() => {}}
-          isDisable={false}
-          tooltip='Add Movie'
-          setClass='btnMd'
-        >
-          + Add movie
-        </Button>
-        <Button
-          onClick={() => {}}
-          isDisable={false}
-          tooltip='Add Movie'
-          setClass='btnLg'
-        >
-          + Add movie
-        </Button>
-        <Button
-          onClick={() => {}}
-          isDisable={false}
-          tooltip='Add Movie'
-          setClass='btnMd'
-        >
-          + Add movie
-        </Button>
+        <div className={Styles.topSection}>
+          <Logotype />
+          <Button
+            onClick={() => {}}
+            isDisable={false}
+            tooltip='Add Movie'
+            setClass='btnMd btnTransparent'
+          >
+            + Add movie
+          </Button>
+        </div>
       </div>
     </header>
   );
