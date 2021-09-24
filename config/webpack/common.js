@@ -100,18 +100,18 @@ module.exports = {
   },
 
   plugins: [
-    new webpack.ProgressPlugin(),
+    isDevMode && new webpack.ProgressPlugin(),
 
-    new webpack.ProvidePlugin({ React: 'react' }),
+    isDevMode && new webpack.ProvidePlugin({ React: 'react' }),
 
     isDevMode ? new webpack.HotModuleReplacementPlugin() : new ImageminPlugin({ test: EXT_IMAGES }),
 
-    new MiniCssExtractPlugin({
+    isDevMode && new MiniCssExtractPlugin({
       filename: 'css/[name].[contenthash].css',
       chunkFilename: 'css/[id].[contenthash].css',
     }),
 
-    new HtmlWebpackPlugin({
+    isDevMode && new HtmlWebpackPlugin({
       template: `${paths.public}/index.html`,
       filename: 'index.html',
       scriptLoading: 'blocking',

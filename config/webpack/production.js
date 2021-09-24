@@ -1,3 +1,8 @@
+'use strict';
+
+process.env.BABEL_ENV = 'production';
+process.env.NODE_ENV = 'production';
+
 const common = require('./common');
 const { merge } = require('webpack-merge');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');

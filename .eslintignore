@@ -3,3 +3,6 @@
 
 # Ignore built files
 build/*
+
+# Ignore configuration files
+config/
