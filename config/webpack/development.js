@@ -6,9 +6,14 @@ process.env.NODE_ENV = 'development';
 const paths = require('../paths');
 const common = require('./common');
 const { merge } = require('webpack-merge');
+const webpack = require('webpack');
 
 module.exports = merge(common, {
   mode: 'development',
+
+  output: {
+    publicPath: '/',
+  },
 
   target: 'web',
 
@@ -17,6 +22,10 @@ module.exports = merge(common, {
   module: {
     rules: [],
   },
+
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ],
 
   devServer: {
     static: {

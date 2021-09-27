@@ -76,14 +76,17 @@
 
 // BUTTON SIZES
 .btnLg {
+	min-width: 13rem;
 	width: 13rem;
 	height: 3rem;
 }
 
 .btnMd {
+	min-width: 11.5rem;
 	width: 11.5rem;
 }
 
 .btnSm {
+	min-width: 9rem;
 	width: 9rem;
 }

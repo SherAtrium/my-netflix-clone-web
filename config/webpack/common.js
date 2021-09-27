@@ -11,7 +11,6 @@ const isDevMode = process.env.NODE_ENV === 'development';
 const EXT_HTML = /\.html$/i;
 const EXT_JSX = /\.m?jsx?$/i;
 const EXT_CSS_SASS_SCSS = /\.(c|sa|sc)ss$/i;
-const EXT_IMAGES = /\.(jpe?g|png|gif|svg)$/i;
 const EXT_MODULE_CSS_SASS_SCSS = /\.module\.(c|sa|sc)ss$/i;
 const EXT_STATIC_FILES = /\.(jpe?g|png|gif|svg|eot|ttf|woff2?)$/i;
 
@@ -21,7 +20,6 @@ module.exports = {
   output: {
     path: paths.build,
     filename: 'js/[name].[contenthash].bundle.js',
-    publicPath: '/',
     clean: true,
     crossOriginLoading: 'anonymous',
     module: true,
@@ -100,18 +98,11 @@ module.exports = {
   },
 
   plugins: [
-    isDevMode && new webpack.ProgressPlugin(),
+    new webpack.ProgressPlugin(),
 
-    isDevMode && new webpack.ProvidePlugin({ React: 'react' }),
+    new webpack.ProvidePlugin({ React: 'react' }),
 
-    isDevMode ? new webpack.HotModuleReplacementPlugin() : new ImageminPlugin({ test: EXT_IMAGES }),
-
-    isDevMode && new MiniCssExtractPlugin({
-      filename: 'css/[name].[contenthash].css',
-      chunkFilename: 'css/[id].[contenthash].css',
-    }),
-
-    isDevMode && new HtmlWebpackPlugin({
+    new HtmlWebpackPlugin({
       template: `${paths.public}/index.html`,
       filename: 'index.html',
       scriptLoading: 'blocking',

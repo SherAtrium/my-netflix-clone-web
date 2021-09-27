@@ -1,9 +1,10 @@
 import Logotype from '../Logotype/Logotype';
 
+import Button from '../Button/Button';
+import Strings from '../../Utils/Strings';
 import headerImg from '../../Resources/HeaderBG.png';
 
 import Styles from './Header.module.scss';
-import Button from '../Button/Button';
 
 const Header = () => {
   return (
@@ -11,17 +12,38 @@ const Header = () => {
       <img src={headerImg} alt='Background collage' />
 
       <div className='container'>
-        <div className={Styles.topSection}>
+        <section className={Styles['section-1']}>
           <Logotype />
+
           <Button
             onClick={() => {}}
             isDisable={false}
-            tooltip='Add Movie'
+            tooltip={Strings.buttons.addMovie}
             setClass='btnMd btnTransparent'
           >
-            + Add movie
+            {Strings.buttons.addMovie}
           </Button>
-        </div>
+        </section>
+
+        <section className={Styles['section-2']}>
+          <h3>{Strings.inputs.searchBar.title}</h3>
+
+          <div className={Styles.inputContainer}>
+            <input
+              type='text'
+              placeholder={Strings.inputs.searchBar.placeholder}
+            />
+
+            <Button
+              onClick={() => {}}
+              isDisable={false}
+              tooltip={Strings.buttons.search}
+              setClass='btnLg btnRed'
+            >
+              {Strings.buttons.search}
+            </Button>
+          </div>
+        </section>
       </div>
     </header>
   );
