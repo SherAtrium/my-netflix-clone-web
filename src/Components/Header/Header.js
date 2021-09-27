@@ -13,7 +13,7 @@ const Header = () => {
 
       <div className='container'>
         <section className={Styles['section-1']}>
-          <Logotype />
+          <Logotype animated />
 
           <Button
             onClick={() => {}}

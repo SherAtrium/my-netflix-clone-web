@@ -1,5 +1,10 @@
 const MoviesList = () => {
-  return <div>Movies List</div>;
+
+  return (
+    <div className='container'>
+      asdasd
+    </div>
+  );
 };
 
 export default MoviesList;
