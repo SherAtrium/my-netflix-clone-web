@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
+import Styles from './ErrorBoundary.module.scss';
 
 class ErrorBoundary extends Component {
   state = {
@@ -24,16 +25,8 @@ class ErrorBoundary extends Component {
       props: { children },
     } = this;
 
-    const errorTextStyling = {
-      height: '100vh',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      color: '#ffffff',
-    };
-
     return hasError ? (
-      <div style={errorTextStyling}>
+      <div className={Styles.errorBoundary}>
         <h1>Something went wrong. Please, try to refresh page.</h1>
         <code>ERROR MESSAGE: {errorMessage}</code>
       </div>
