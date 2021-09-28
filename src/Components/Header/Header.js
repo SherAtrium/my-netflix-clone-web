@@ -1,6 +1,6 @@
 import Logotype from '../Logotype/Logotype';
 
-import Button from '../Button/Button';
+import { Button, BUTTON_SIZE, BUTTON_STYLE } from '../Button/Button';
 import Strings from '../../Utils/Strings';
 import headerImg from '../../Resources/HeaderBG.png';
 
@@ -16,10 +16,10 @@ const Header = () => {
           <Logotype animated />
 
           <Button
+            tooltip={Strings.buttons.addMovie}
+            btnStyle={BUTTON_STYLE.TRANSPARENT}
             onClick={() => {}}
             isDisable={false}
-            tooltip={Strings.buttons.addMovie}
-            setClass='btnMd btnTransparent'
           >
             {Strings.buttons.addMovie}
           </Button>
@@ -29,16 +29,14 @@ const Header = () => {
           <h3>{Strings.inputs.searchBar.title}</h3>
 
           <div className={Styles.inputContainer}>
-            <input
-              type='text'
-              placeholder={Strings.inputs.searchBar.placeholder}
-            />
+            <input type='text' placeholder={Strings.inputs.searchBar.placeholder} />
 
             <Button
+              tooltip={Strings.buttons.search}
+              btnSize={BUTTON_SIZE.LARGE}
+              btnStyle={BUTTON_STYLE.RED}
               onClick={() => {}}
               isDisable={false}
-              tooltip={Strings.buttons.search}
-              setClass='btnLg btnRed'
             >
               {Strings.buttons.search}
             </Button>

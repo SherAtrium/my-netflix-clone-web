@@ -1,12 +1,31 @@
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
+import Styles from './Button.module.scss';
 
-import './Button.scss';
+const BUTTON_SIZE = {
+  SMALL: Styles.btnSm,
+  MIDDLE: Styles.btnMd,
+  LARGE: Styles.btnLg,
+};
 
-const Button = ({ onClick, setClass, children, isDisable, tooltip = '' }) => {
+const BUTTON_STYLE = {
+  TRANSPARENT: Styles.btnTransparent,
+  OUTLINE: Styles.btnOutlineRed,
+  RED: Styles.btnRed,
+};
+
+const Button = ({
+  tooltip = '',
+  children = null,
+  isDisable = false,
+  onClick = () => {},
+  btnSize = BUTTON_SIZE.MIDDLE,
+  btnStyle = BUTTON_STYLE.RED,
+}) => {
   return (
     <button
       type='button'
-      className={`button ${setClass}`}
+      className={classNames(Styles.button, btnStyle, btnSize)}
       onClick={(...params) => onClick(...params)}
       disabled={isDisable}
       title={tooltip}
@@ -16,20 +35,13 @@ const Button = ({ onClick, setClass, children, isDisable, tooltip = '' }) => {
   );
 };
 
-Button.defaultProps = {
-  children: null,
-  isDisable: false,
-  onClick: () => {},
-  setClass: '',
-  tooltip: '',
-};
-
 Button.propTypes = {
   onClick: PropTypes.func,
-  setClass: PropTypes.string,
   children: PropTypes.node,
   isDisable: PropTypes.bool,
   tooltip: PropTypes.string,
+  btnSize: PropTypes.string,
+  btnStyle: PropTypes.string,
 };
 
-export default Button;
+export { Button, BUTTON_SIZE, BUTTON_STYLE };
