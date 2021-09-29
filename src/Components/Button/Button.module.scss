@@ -1,7 +1,6 @@
 @import "../../MainStyles/variables";
 
 .button {
-	height: 2.5rem;
 	padding: 0 1rem;
 
 	border: none;
@@ -21,43 +20,76 @@
 	cursor: not-allowed;
 }
 
-// BUTTON OUTLINE
-.btnOutline {
-	border: 2px solid $red;
-	background-color: transparent;
+.btnPrimary {
+	color: $black;
+	background-color: $white;
+
+	&:disabled {
+		color: $gray_light;
+	}
 }
 
-// BUTTON TRANSPARENT
 .btnTransparent {
-	color: $red;
-	font-weight: 600;
-	background: $alpha_gray_primary;
-}
-
-.btnTransparent:hover {
-	color: $red_hover;
-	background-color: $alpha_gray_secondary;
-}
-
-.btnTransparent:disabled {
-	color: $red_dark;
+	color: $white;
 	background-color: $alpha_gray_primary;
+
+	&:disabled {
+		color: $gray_light;
+	}
 }
 
+.btnOutline {
+	color: $white;
+	border: 2px solid $white;
+	background-color: transparent;
 
-// BUTTON RED
-.btnRed {
+	&:disabled {
+		color: $gray_light;
+		border: 2px solid $gray_light;
+	}
+}
+
+.btnPrimary.btnRed {
 	color: $white;
 	background-color: $red;
+
+	&:hover {
+		background-color: $red_hover;
+	}
+
+	&:disabled {
+		color: $red_dark;
+		background-color: $red;
+	}
 }
 
-.btnRed:hover {
-	background-color: $red_hover;
+.btnTransparent.btnRed {
+	color: $red;
+
+	&:hover {
+		color: $red_hover;
+		background-color: $alpha_gray_secondary;
+	}
+
+	&:disabled {
+		color: $red_dark;
+		background-color: $alpha_gray_primary;
+	}
 }
 
-.btnRed:disabled {
-	color: $red_dark;
-	background-color: $red;
+.btnOutline.btnRed {
+	color: $red;
+	border: 2px solid $red;
+
+	&:hover {
+		color: $red_hover;
+		border: 2px solid $red_hover;
+	}
+
+	&:disabled {
+		color: $red_dark;
+		border: 2px solid $red_dark;
+	}
 }
 
 
@@ -71,9 +103,11 @@
 .btnMd {
 	min-width: 11.5rem;
 	width: 11.5rem;
+	height: 2.5rem;
 }
 
 .btnSm {
-	min-width: 9rem;
-	width: 9rem;
+	min-width: 10rem;
+	width: 10rem;
+	height: 2.5rem;
 }

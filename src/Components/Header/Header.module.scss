@@ -72,6 +72,13 @@
 	}
 }
 
+// TODO TEST
+.aa {
+	display: flex;
+	flex-direction: column;
+	padding: 0 10rem;
+}
+
 @keyframes bg-fade-out {
 	0% {
 		opacity: .5;

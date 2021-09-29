@@ -17,9 +17,9 @@ const Header = () => {
 
           <Button
             tooltip={Strings.buttons.addMovie}
-            btnColor={BUTTON_COLOR.TRANSPARENT}
-            btnStyle={BUTTON_STYLE.COMMON}
+            btnStyle={BUTTON_STYLE.TRANSPARENT}
             btnSize={BUTTON_SIZE.MIDDLE}
+            btnColor={BUTTON_COLOR.RED}
             onClick={() => {}}
             isDisable={false}
           >
@@ -35,9 +35,9 @@ const Header = () => {
 
             <Button
               tooltip={Strings.buttons.search}
-              btnStyle={BUTTON_STYLE.COMMON}
-              btnColor={BUTTON_COLOR.RED}
+              btnStyle={BUTTON_STYLE.PRIMARY}
               btnSize={BUTTON_SIZE.LARGE}
+              btnColor={BUTTON_COLOR.RED}
               onClick={() => {}}
               isDisable={false}
             >
@@ -46,6 +46,7 @@ const Header = () => {
           </div>
         </section>
       </div>
+
     </header>
   );
 };

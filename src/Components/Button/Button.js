@@ -2,20 +2,20 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Styles from './Button.module.scss';
 
-const BUTTON_SIZE = {
-  SMALL: Styles.btnSm,
-  MIDDLE: Styles.btnMd,
-  LARGE: Styles.btnLg,
+const BUTTON_STYLE = {
+  PRIMARY: Styles.btnPrimary,
+  OUTLINE: Styles.btnOutline,
+  TRANSPARENT: Styles.btnTransparent,
 };
 
 const BUTTON_COLOR = {
-  TRANSPARENT: Styles.btnTransparent,
   RED: Styles.btnRed,
 };
 
-const BUTTON_STYLE = {
-  OUTLINE: Styles.btnOutline,
-  COMMON: Styles.button,
+const BUTTON_SIZE = {
+  LARGE: Styles.btnLg,
+  MIDDLE: Styles.btnMd,
+  SMALL: Styles.btnSm,
 };
 
 const Button = ({
@@ -23,14 +23,14 @@ const Button = ({
   children = null,
   isDisable = false,
   onClick = () => {},
-  btnStyle = BUTTON_STYLE.COMMON,
+  btnStyle = '',
   btnColor = '',
   btnSize = '',
 }) => {
   return (
     <button
       type='button'
-      className={classNames(btnColor, btnStyle, btnSize)}
+      className={classNames(Styles.button, btnStyle, btnColor, btnSize)}
       onClick={(...params) => onClick(...params)}
       disabled={isDisable}
       title={tooltip}
