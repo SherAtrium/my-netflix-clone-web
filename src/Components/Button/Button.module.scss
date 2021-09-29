@@ -21,8 +21,13 @@
 	cursor: not-allowed;
 }
 
+// BUTTON OUTLINE
+.btnOutline {
+	border: 2px solid $red;
+	background-color: transparent;
+}
 
-// BUTTON OUTLINE RED
+// BUTTON TRANSPARENT
 .btnTransparent {
 	color: $red;
 	font-weight: 600;
@@ -53,24 +58,6 @@
 .btnRed:disabled {
 	color: $red_dark;
 	background-color: $red;
-}
-
-
-// BUTTON OUTLINE RED
-.btnOutlineRed {
-	color: $red;
-	border: 2px solid $red;
-	background-color: transparent;
-}
-
-.btnOutlineRed:hover {
-	color: $red_hover;
-	border: 2px solid $red_hover;
-}
-
-.btnOutlineRed:disabled {
-	color: $red_dark;
-	border: 2px solid $red_dark;
 }
 
 

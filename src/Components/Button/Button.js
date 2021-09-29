@@ -8,10 +8,14 @@ const BUTTON_SIZE = {
   LARGE: Styles.btnLg,
 };
 
-const BUTTON_STYLE = {
+const BUTTON_COLOR = {
   TRANSPARENT: Styles.btnTransparent,
-  OUTLINE: Styles.btnOutlineRed,
   RED: Styles.btnRed,
+};
+
+const BUTTON_STYLE = {
+  OUTLINE: Styles.btnOutline,
+  COMMON: Styles.button,
 };
 
 const Button = ({
@@ -19,13 +23,14 @@ const Button = ({
   children = null,
   isDisable = false,
   onClick = () => {},
-  btnSize = BUTTON_SIZE.MIDDLE,
-  btnStyle = BUTTON_STYLE.RED,
+  btnStyle = BUTTON_STYLE.COMMON,
+  btnColor = '',
+  btnSize = '',
 }) => {
   return (
     <button
       type='button'
-      className={classNames(Styles.button, btnStyle, btnSize)}
+      className={classNames(btnColor, btnStyle, btnSize)}
       onClick={(...params) => onClick(...params)}
       disabled={isDisable}
       title={tooltip}
@@ -40,8 +45,9 @@ Button.propTypes = {
   children: PropTypes.node,
   isDisable: PropTypes.bool,
   tooltip: PropTypes.string,
-  btnSize: PropTypes.string,
   btnStyle: PropTypes.string,
+  btnColor: PropTypes.string,
+  btnSize: PropTypes.string,
 };
 
-export { Button, BUTTON_SIZE, BUTTON_STYLE };
+export { Button, BUTTON_SIZE, BUTTON_COLOR, BUTTON_STYLE };

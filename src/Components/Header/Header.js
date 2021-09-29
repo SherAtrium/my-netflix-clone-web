@@ -1,6 +1,6 @@
 import Logotype from '../Logotype/Logotype';
 
-import { Button, BUTTON_SIZE, BUTTON_STYLE } from '../Button/Button';
+import { Button, BUTTON_COLOR, BUTTON_SIZE, BUTTON_STYLE } from '../Button/Button';
 import Strings from '../../Utils/Strings';
 import headerImg from '../../Resources/HeaderBG.png';
 
@@ -12,12 +12,14 @@ const Header = () => {
       <img src={headerImg} alt='Background collage' />
 
       <div className='container'>
-        <section className={Styles['section-1']}>
+        <section className={Styles.topSection}>
           <Logotype animated />
 
           <Button
             tooltip={Strings.buttons.addMovie}
-            btnStyle={BUTTON_STYLE.TRANSPARENT}
+            btnColor={BUTTON_COLOR.TRANSPARENT}
+            btnStyle={BUTTON_STYLE.COMMON}
+            btnSize={BUTTON_SIZE.MIDDLE}
             onClick={() => {}}
             isDisable={false}
           >
@@ -25,7 +27,7 @@ const Header = () => {
           </Button>
         </section>
 
-        <section className={Styles['section-2']}>
+        <section className={Styles.searchSection}>
           <h3>{Strings.inputs.searchBar.title}</h3>
 
           <div className={Styles.inputContainer}>
@@ -33,8 +35,9 @@ const Header = () => {
 
             <Button
               tooltip={Strings.buttons.search}
+              btnStyle={BUTTON_STYLE.COMMON}
+              btnColor={BUTTON_COLOR.RED}
               btnSize={BUTTON_SIZE.LARGE}
-              btnStyle={BUTTON_STYLE.RED}
               onClick={() => {}}
               isDisable={false}
             >
