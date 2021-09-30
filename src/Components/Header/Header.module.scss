@@ -1,0 +1,93 @@
+@import "../../MainStyles/variables";
+
+.header {
+	position: relative;
+
+	width: 100%;
+	min-height: 25rem;
+
+	overflow: hidden;
+	box-sizing: border-box;
+	background-color: $black;
+	border-bottom: 10px solid $gray_secondary;
+
+	z-index: 1;
+
+	> img {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+
+		opacity: 0.3;
+		object-fit: cover;
+
+		filter: blur(4px);
+		mix-blend-mode: normal;
+
+		-webkit-animation: bg-fade-out 1s ease-in-out;
+		-o-animation: bg-fade-out 1s ease-in-out;
+		animation: bg-fade-out 1s ease-in-out;
+
+		z-index: -1;
+	}
+
+	.topSection {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin: 1rem 0;
+	}
+
+	.searchSection {
+		width: 80%;
+		margin: 3rem auto;
+
+		h3 {
+			color: $white;
+			font-size: $fontSize_32;
+			font-weight: 300;
+			letter-spacing: 1px;
+			text-transform: uppercase;
+		}
+
+		.inputContainer {
+			display: flex;
+
+			input {
+				width: 100%;
+				padding: 0 1.5rem;
+				margin-right: 1.5rem;
+
+				border: none;
+				outline: none;
+				color: $white;
+				mix-blend-mode: normal;
+				font-size: $fontSize_16;
+				border-radius: $borderRadius_4;
+				background: rgba(50, 50, 50, 0.8);
+			}
+		}
+	}
+}
+
+// TODO TEST
+.aa {
+	display: flex;
+	flex-direction: column;
+	padding: 0 10rem;
+}
+
+@keyframes bg-fade-out {
+	0% {
+		opacity: .5;
+		transform: scale(2);
+		filter: blur(1px);
+	}
+	100% {
+		opacity: .3;
+		transform: scale(1);
+		filter: blur(4px);
+	}
+}

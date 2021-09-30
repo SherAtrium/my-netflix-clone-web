@@ -1,0 +1,11 @@
+@import "../../MainStyles/variables";
+
+.footer {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	height: 4.375rem;
+
+	background-color: $gray_primary;
+}

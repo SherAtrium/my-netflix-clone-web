@@ -1,0 +1,66 @@
+@import "variables";
+
+// FONT Montserrat
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;900&display=swap');
+
+
+// * * * ROOT STYLES * * * //
+body {
+  margin: 0;
+  padding: 0;
+  color: $white;
+  box-sizing: border-box;
+  background-color: $gray_dark;
+}
+
+* {
+  font-family: 'Montserrat', sans-serif;
+}
+
+img {
+  user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+
+/* CONTAINER */
+.container {
+  padding-right: 1rem;
+  padding-left: 1rem;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 576px) {
+  .container {
+    width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .container {
+    width: 1370px;
+  }
+}
