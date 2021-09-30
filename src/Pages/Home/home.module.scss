@@ -1,5 +1,5 @@
 @import "../../MainStyles/variables";
 
 .mainWrapper {
-	min-height: calc(100vh - 29.375rem);
+	min-height: calc(100vh - #{$wrapper_homePage_height + $wrapper_footer_height});
 }
