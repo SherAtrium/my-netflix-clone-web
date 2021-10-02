@@ -1,20 +1,36 @@
 @import '../../MainStyles/variables';
 
-.genreList {
+ul.genreList {
 	display: flex;
 
-	width: 100%;
 	height: 3.5rem;
 	margin: 0;
 	padding: 0;
 
 	list-style-type: none;
-	border: 1px solid red;
+	//border: 1px solid red;
 
 	> li {
+		position: relative;
+
 		display: flex;
 		align-items: center;
+
 		padding: 0 1rem;
-		border: 1px solid red;
+
+		color: $white;
+		cursor: pointer;
+		user-select: none;
+		text-decoration: none;
+
+		&.isActive:before {
+			content: '';
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			height: 2px;
+			background-color: $red;
+		}
 	}
 }
