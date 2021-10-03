@@ -1,6 +1,6 @@
 @import "../../MainStyles/variables";
 
-.genreNavbarContainer {
+nav.genreNavbarContainer {
 	position: relative;
 
 	display: flex;
@@ -17,4 +17,10 @@
 
 		background-color: $gray_primary;
 	}
+}
+
+section.movieCards {
+	display: flex;
+	flex-wrap: wrap;
+	margin: 2rem auto;
 }

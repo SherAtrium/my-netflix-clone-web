@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 
 import classNames from 'classnames';
 import Loader from '../Loader/Loader';
-import MovieGenres from '../MovieGenres/MovieGenres';
+import MovieCard from './MovieCard/MovieCard';
+import MovieGenres from './MovieGenres/MovieGenres';
 import { getMovieGenres } from '../../Services/FakeApi';
-import MoviesListSort from '../MoviesListSort/MoviesListSort';
+import MoviesListSort from './MoviesListSort/MoviesListSort';
 
 import Strings from '../../Utils/Strings';
 import Styles from './MoviesList.module.scss';
@@ -22,7 +23,7 @@ const sortingTypes = [
 ];
 
 const MoviesList = () => {
-  const [isLoading, setIsloading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   const [genres, setGenres] = useState(allGenres);
   const [selectedGenre, setSelectedGenre] = useState(genres[0]);
@@ -56,15 +57,17 @@ const MoviesList = () => {
   };
 
   useEffect(async () => {
-    setIsloading(true);
+    setIsLoading(true);
     setMovieList([]);
+
     const response = await getMovieGenres();
     setMovieList(
       selectedGenre.title === Strings.movieGenres.all
         ? response.data
         : sortMoviesByGenre(response.data),
     );
-    setIsloading(false);
+
+    setIsLoading(false);
   }, [genres]);
 
   return (
@@ -74,13 +77,15 @@ const MoviesList = () => {
         <MoviesListSort sortTypes={sortTypes} onSortTypeClick={onSortTypeClick} />
       </nav>
 
-      <div>
-        <Loader loading={isLoading} />
+      <Loader loading={isLoading} />
+
+      <section className={classNames('container', Styles.movieCards)}>
+        {movieList.length === 0 && !isLoading && <p>There are no films in this genre yet</p>}
 
         {movieList.map(i => (
-          <p key={i.title}>{i.title}</p>
+          <MovieCard key={i.id} movieData={i} />
         ))}
-      </div>
+      </section>
     </>
   );
 };

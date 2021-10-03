@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import { useEffect, useRef } from 'react';
-import useToggle from '../CustomHooks/useToggle';
+import useToggle from '../../CustomHooks/useToggle';
 
-import Strings from '../../Utils/Strings';
+import Strings from '../../../Utils/Strings';
 import Styles from './MoviesListSort.module.scss';
 
 const findSelectedSortType = array => {

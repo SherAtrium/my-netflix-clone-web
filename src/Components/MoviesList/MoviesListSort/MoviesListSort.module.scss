@@ -1,4 +1,4 @@
-@import "../../MainStyles/variables";
+@import "../../../MainStyles/variables";
 
 .sortContainer {
 	display: flex;
@@ -52,6 +52,8 @@
 			background-color: $gray_dark;
 			border-radius: $borderRadius_4;
 			box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+			z-index: 100;
 
 
 			li {
