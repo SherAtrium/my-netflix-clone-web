@@ -8,7 +8,6 @@ ul.genreList {
 	padding: 0;
 
 	list-style-type: none;
-	//border: 1px solid red;
 
 	> li {
 		position: relative;
@@ -31,6 +30,11 @@ ul.genreList {
 			width: 100%;
 			height: 2px;
 			background-color: $red;
+			transition: background-color .3s ease-in-out;
+		}
+
+		&.isActive:hover:before {
+			background-color: $red_hover;
 		}
 	}
 }

@@ -3,13 +3,13 @@ import classNames from 'classnames';
 
 import Styles from './MovieGenres.module.scss';
 
-const MovieGenres = ({ genres = [], onSelectNavItem = () => {} }) => {
+const MovieGenres = ({ genres = [], onSelectGenre = () => {} }) => {
   return (
     <ul className={Styles.genreList}>
       {genres.map(genre => (
         <li
           key={genre.id}
-          onClick={() => onSelectNavItem(genre.id)}
+          onClick={() => onSelectGenre(genre.id)}
           className={classNames({ [`${Styles.isActive}`]: genre.isActive })}
         >
           {genre.title}
@@ -21,7 +21,7 @@ const MovieGenres = ({ genres = [], onSelectNavItem = () => {} }) => {
 
 MovieGenres.propTypes = {
   genres: PropTypes.array,
-  onSelectNavItem: PropTypes.func,
+  onSelectGenre: PropTypes.func,
 };
 
 export default MovieGenres;

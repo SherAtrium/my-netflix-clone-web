@@ -1,12 +1,14 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
 import classNames from 'classnames';
+import Loader from '../Loader/Loader';
 import MovieGenres from '../MovieGenres/MovieGenres';
+import { getMovieGenres } from '../../Services/FakeApi';
 import MoviesListSort from '../MoviesListSort/MoviesListSort';
 
-import Styles from './MoviesList.module.scss';
 import Strings from '../../Utils/Strings';
+import Styles from './MoviesList.module.scss';
 
-// TEMPORARY DATA
 const allGenres = [
   { id: 'lkm23', title: Strings.movieGenres.all, isActive: true },
   { id: '98zxc', title: Strings.movieGenres.documentary, isActive: false },
@@ -14,35 +16,72 @@ const allGenres = [
   { id: 'as9da', title: Strings.movieGenres.horror, isActive: false },
   { id: '90bcv', title: Strings.movieGenres.crime, isActive: false },
 ];
-
 const sortingTypes = [
   { id: 'zxc323', label: Strings.movieListSorting.releaseDate, isSelected: true },
   { id: 'mlkg90', label: Strings.movieListSorting.name, isSelected: false },
 ];
 
 const MoviesList = () => {
-  const [sortTypes, setSortTypes] = useState(sortingTypes);
-  const [genres, setGenres] = useState(allGenres);
+  const [isLoading, setIsloading] = useState(true);
 
-  const onSelectNavItem = id =>
+  const [genres, setGenres] = useState(allGenres);
+  const [selectedGenre, setSelectedGenre] = useState(genres[0]);
+
+  const [sortTypes, setSortTypes] = useState(sortingTypes);
+
+  const [movieList, setMovieList] = useState([]);
+
+  const findSelectedGenre = id => genres.find(i => i.id === id);
+
+  const onSelectGenre = id => {
+    setSelectedGenre(findSelectedGenre(id));
+
     setGenres(() => {
       const deepCopy = JSON.parse(JSON.stringify(genres));
       deepCopy.forEach(i => (i.isActive = i.id === id));
       return [...deepCopy];
     });
+  };
 
-  const onSortTypeClick = type =>
+  const sortMoviesByGenre = list => {
+    return list.filter(movie => movie.genres.indexOf(selectedGenre.title) > -1);
+  };
+
+  const onSortTypeClick = type => {
     setSortTypes(() => {
       const deepCopy = JSON.parse(JSON.stringify(sortTypes));
       deepCopy.forEach(i => (i.isSelected = i.id === type.id));
       return [...deepCopy];
     });
+  };
+
+  useEffect(async () => {
+    setIsloading(true);
+    setMovieList([]);
+    const response = await getMovieGenres();
+    setMovieList(
+      selectedGenre.title === Strings.movieGenres.all
+        ? response.data
+        : sortMoviesByGenre(response.data),
+    );
+    setIsloading(false);
+  }, [genres]);
 
   return (
-    <nav className={classNames('container', Styles.genreNavbarContainer)}>
-      <MovieGenres genres={genres} onSelectNavItem={onSelectNavItem} />
-      <MoviesListSort sortTypes={sortTypes} onSortTypeClick={onSortTypeClick} />
-    </nav>
+    <>
+      <nav className={classNames('container', Styles.genreNavbarContainer)}>
+        <MovieGenres genres={genres} onSelectGenre={onSelectGenre} />
+        <MoviesListSort sortTypes={sortTypes} onSortTypeClick={onSortTypeClick} />
+      </nav>
+
+      <div>
+        <Loader loading={isLoading} />
+
+        {movieList.map(i => (
+          <p key={i.title}>{i.title}</p>
+        ))}
+      </div>
+    </>
   );
 };
 
