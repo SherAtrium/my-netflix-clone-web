@@ -1,0 +1,23 @@
+@import "../../MainStyles/variables";
+
+.loader {
+	width: 2rem;
+	height: 2rem;
+	margin: 3.5rem auto;
+
+	border-radius: 50%;
+	border: 2px solid $white;
+	border-top: 2px solid $red;
+	animation: spin 1s linear infinite;
+	-webkit-animation: spin 1s linear infinite;
+}
+
+@-webkit-keyframes spin {
+	0% { -webkit-transform: rotate(0deg); }
+	100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}

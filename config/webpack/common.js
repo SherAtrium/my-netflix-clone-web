@@ -43,6 +43,9 @@ module.exports = {
       '@': paths.src,
     },
     extensions: ['.mjs', '.js', '.jsx', '.json'],
+    fallback: {
+      // "path": false,
+    }
   },
 
   module: {

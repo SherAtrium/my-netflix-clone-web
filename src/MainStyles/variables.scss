@@ -4,10 +4,11 @@ $red_hover: #FF3649;
 $red_dark: #AB5959;
 
 // GRAY COLOR FAMILY
-$gray_light: #B1B1B1;
 $gray_dark: #232323;
 $gray_primary: #424242;
 $gray_secondary: #555555;
+$gray_tertiary: #919191;
+$gray_light: #B1B1B1;
 
 $alpha_gray_primary: rgba(96, 96, 96, 0.6);
 $alpha_gray_secondary: rgba(96, 96, 96, 0.7);
@@ -35,3 +36,8 @@ $fontSize_16: 1rem;
 $fontSize_18: 1.125rem;
 $fontSize_24: 1.5rem;
 $fontSize_32: 2rem;
+
+
+// IMPLEMENT MAIN PAGE WRAPPER
+$wrapper_homePage_height: 25rem;
+$wrapper_footer_height: 4.375rem;

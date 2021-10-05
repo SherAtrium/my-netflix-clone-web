@@ -1,2 +1,26 @@
 @import "../../MainStyles/variables";
 
+nav.genreNavbarContainer {
+	position: relative;
+
+	display: flex;
+	justify-content: space-between;
+
+	&:before {
+		position: absolute;
+		content: '';
+		bottom: 0;
+		left: 1rem;
+
+		width: calc( 100% - 2rem );
+		height: 2px;
+
+		background-color: $gray_primary;
+	}
+}
+
+section.movieCards {
+	display: flex;
+	flex-wrap: wrap;
+	margin: 2rem auto;
+}
