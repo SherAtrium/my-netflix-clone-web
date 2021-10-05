@@ -1,10 +1,177 @@
 @import "../../MainStyles/variables";
 
-.popupContainer {
+.popup {
 	position: fixed;
 	top: 0;
 	left: 0;
 	right: 0;
 	bottom: 0;
-	z-index: 199;
+	z-index: 109;
+
+	.popupOverlay {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		width: 100%;
+		height: 100vh;
+
+		z-index: 109;
+
+		cursor: pointer;
+		background-color: rgba(0, 0, 0, 0.4);
+		backdrop-filter: saturate(180%) blur(15px);
+		-webkit-animation: fade-in 0.3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+		animation: fade-in 0.3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+
+		.popupContent {
+			position: relative;
+
+			max-height: 80vh;
+
+			cursor: auto;
+			padding: 2rem;
+			overflow: auto;
+			background-color: $gray_dark;
+			border-radius: $borderRadius_8;
+			box-shadow: 10px 15px 80px rgba(0, 0, 0, 0.16);
+			z-index: 1;
+
+			-webkit-animation: fade-in-top 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) 0.2s both;
+			animation: fade-in-top 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) 0.2s both;
+
+			.popupContentHeader {
+				position: relative;
+
+				display: flex;
+				align-items: center;
+
+				width: 100%;
+
+				z-index: 2;
+
+				p.title {
+					margin: 0;
+					font-weight: 300;
+					font-size: $fontSize_32;
+					text-transform: uppercase;
+				}
+
+				.popupClose {
+					position: absolute;
+					top: -8px;
+					right: -8px;
+
+					min-width: 2.75rem;
+					min-height: 2.75rem;
+
+					cursor: pointer;
+					border-radius: $borderRadius_8;
+
+					&:hover {
+						transition: box-shadow 0.3s ease-in-out;
+
+						box-shadow: -1px 4px 15px 7px rgba(0, 0, 0, 0.2);
+						filter: drop-shadow(1px -1px 15px rgba(0, 0, 0, 0.2));
+
+						&:hover:before,
+						&:hover:after {
+							background-color: $red;
+						}
+					}
+
+					&:before, &:after {
+						position: absolute;
+						top: 50%;
+						left: 50%;
+						content: '';
+						height: 26px;
+						width: 2px;
+						background-color: $white;
+						transition: background-color .3s ease-in-out;
+					}
+
+					&:before {
+						-webkit-transform: rotate(45deg);
+						transform: translate(-50%, -50%) rotate(45deg);
+					}
+
+					&:after {
+						-webkit-transform: rotate(-45deg);
+						transform: translate(-50%, -50%) rotate(-45deg);
+					}
+				}
+			}
+		}
+	}
+}
+
+
+.sizeLg {
+	width: 60rem;
+}
+
+.sizeSm {
+	width: 42rem;
+}
+
+
+@-webkit-keyframes fade-in {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes fade-in {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@-webkit-keyframes fade-in-top {
+	0% {
+		-webkit-transform: translateY(-100px);
+		transform: translateY(-100px);
+		opacity: 0;
+	}
+	100% {
+		-webkit-transform: translateY(0);
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
+
+@keyframes fade-in-top {
+	0% {
+		-webkit-transform: translateY(-100px);
+		transform: translateY(-100px);
+		opacity: 0;
+	}
+	100% {
+		-webkit-transform: translateY(0);
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
+
+@media screen and (max-width: 1200px) {
+	.sizeLg {
+		width: 70%;
+	}
+
+	.sizeSm {
+		width: 45%;
+	}
 }

@@ -1,30 +1,60 @@
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
+import { useEffect, useRef } from 'react';
+
 import Styles from './Popup.module.scss';
 
 const POPUP_SIZE = {
-  LARGE: Styles.btnLg,
-  SMALL: Styles.btnSm,
+  LARGE: Styles.sizeLg,
+  SMALL: Styles.sizeSm,
 };
 
 const Popup = ({
   title = '',
+  isOpen = true,
+  popupSize = '',
   children = null,
   closeMethod = () => {},
-  isAvailableCloseBtn = false,
   isClickableOverlay = false,
+  isAvailableCloseBtn = false,
 }) => {
-  return (
-    <div className={Styles.popupContainer}>
+  const popupRef = useRef();
 
+  const handleClickOutside = e => {
+    if (isClickableOverlay && popupRef.current && !popupRef.current.contains(e.target))
+      closeMethod();
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  return isOpen ? (
+    <div className={Styles.popup}>
+      <div className={Styles.popupOverlay}>
+        <div className={classNames(Styles.popupContent, popupSize)} ref={popupRef}>
+          <div className={Styles.popupContentHeader}>
+            {title && <p className={Styles.title}>{title}</p>}
+            {isAvailableCloseBtn && <span className={Styles.popupClose} onClick={closeMethod} />}
+          </div>
+
+          {children}
+        </div>
+      </div>
     </div>
-  )
+  ) : null;
 };
 
 Popup.propTypes = {
+  isOpen: PropTypes.bool,
   title: PropTypes.string,
+  children: PropTypes.node,
   closeMethod: PropTypes.func,
+  popupSize: PropTypes.string,
   isClickableOverlay: PropTypes.bool,
   isAvailableCloseBtn: PropTypes.bool,
 };
 
-export default Popup;
+export { Popup, POPUP_SIZE };
