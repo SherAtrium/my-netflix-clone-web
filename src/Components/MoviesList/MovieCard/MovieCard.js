@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import Styles from './MovieCard.module.scss';
 
 const MovieCard = ({ movieData = {} }) => {
-  console.log(movieData);
   return (
     <div className={Styles.movie}>
       <div className={Styles.imgContainer}>

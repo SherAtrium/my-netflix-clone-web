@@ -37,22 +37,24 @@ const MoviesList = () => {
   const onSelectGenre = id => {
     setSelectedGenre(findSelectedGenre(id));
 
-    setGenres(() => {
-      const deepCopy = JSON.parse(JSON.stringify(genres));
-      deepCopy.forEach(i => (i.isActive = i.id === id));
-      return [...deepCopy];
+    setGenres(prevState => {
+      return prevState.map(item => ({
+        ...item,
+        isActive: item.id === id,
+      }));
     });
   };
 
   const sortMoviesByGenre = list => {
-    return list.filter(movie => movie.genres.indexOf(selectedGenre.title) > -1);
+    return list.filter(movie => movie.genres.includes(selectedGenre.title));
   };
 
   const onSortTypeClick = type => {
-    setSortTypes(() => {
-      const deepCopy = JSON.parse(JSON.stringify(sortTypes));
-      deepCopy.forEach(i => (i.isSelected = i.id === type.id));
-      return [...deepCopy];
+    setSortTypes(prevState => {
+      return prevState.map(item => ({
+        ...item,
+        isSelected: item.id === type.id,
+      }));
     });
   };
 
