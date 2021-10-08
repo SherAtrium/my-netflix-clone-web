@@ -15,8 +15,8 @@ const CustomInput = ({
   onChange = () => {},
 }) => {
   return (
-    <div>
-      <span className={Styles.title}>{title}</span>
+    <div className={Styles.customInput}>
+      <p className={Styles.title}>{title}</p>
 
       <input type={type} placeholder={placeholder} value={value} onChange={onChange} />
     </div>

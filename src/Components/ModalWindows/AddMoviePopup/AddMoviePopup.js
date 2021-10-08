@@ -1,9 +1,12 @@
 import PropTypes from 'prop-types';
 import { Popup, POPUP_SIZE } from '../../Popup/Popup';
 import Strings from '../../../Utils/Strings';
-import {CustomInput, AVAILABLE_INPUT_TYPES } from '../../CustomInput/CustomInput';
+import { CustomInput, AVAILABLE_INPUT_TYPES } from '../../CustomInputs/CustomInput/CustomInput';
+import { useState } from 'react';
 
 const AddMoviePopup = ({ isOpen = false, closeMethod = () => {} }) => {
+  const [title, setTitle] = useState('');
+
   return (
     <Popup
       isOpen={isOpen}
@@ -17,8 +20,9 @@ const AddMoviePopup = ({ isOpen = false, closeMethod = () => {} }) => {
         title={Strings.inputs.movieTitle.title}
         type={AVAILABLE_INPUT_TYPES.TEXT}
         placeholder={Strings.inputs.movieTitle.placeholder}
-        value={''}
-        onChange={() => {} } />
+        value={title}
+        onChange={e => setTitle(e.target.value)}
+      />
     </Popup>
   );
 };
