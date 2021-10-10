@@ -37,7 +37,8 @@
 
 			cursor: auto;
 			padding: 2rem;
-			overflow: auto;
+			//overflow: auto;
+			box-sizing: border-box;
 			background-color: $gray_dark;
 			border-radius: $borderRadius_8;
 			box-shadow: 10px 15px 80px rgba(0, 0, 0, 0.16);

@@ -12,7 +12,7 @@ const MovieGenres = ({ genres = [], onSelectGenre = () => {} }) => {
           onClick={() => onSelectGenre(genre.id)}
           className={classNames({ [`${Styles.isActive}`]: genre.isActive })}
         >
-          {genre.title}
+          {genre.label}
         </li>
       ))}
     </ul>
@@ -20,7 +20,12 @@ const MovieGenres = ({ genres = [], onSelectGenre = () => {} }) => {
 };
 
 MovieGenres.propTypes = {
-  genres: PropTypes.array,
+  genres: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string || PropTypes.number,
+      label: PropTypes.string || PropTypes.number,
+    }),
+  ),
   onSelectGenre: PropTypes.func,
 };
 

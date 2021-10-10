@@ -6,29 +6,18 @@ import MovieCard from './MovieCard/MovieCard';
 import MovieGenres from './MovieGenres/MovieGenres';
 import { getMovieGenres } from '../../Services/FakeApi';
 import MoviesListSort from './MoviesListSort/MoviesListSort';
+import { ALL_GENRES, AVAILABLE_TYPES_FOR_SORTING } from '../../Utils/Constants';
 
 import Strings from '../../Utils/Strings';
 import Styles from './MoviesList.module.scss';
 
-const allGenres = [
-  { id: 'lkm23', title: Strings.movieGenres.all, isActive: true },
-  { id: '98zxc', title: Strings.movieGenres.documentary, isActive: false },
-  { id: '0vice', title: Strings.movieGenres.comedy, isActive: false },
-  { id: 'as9da', title: Strings.movieGenres.horror, isActive: false },
-  { id: '90bcv', title: Strings.movieGenres.crime, isActive: false },
-];
-const sortingTypes = [
-  { id: 'zxc323', label: Strings.movieListSorting.releaseDate, isSelected: true },
-  { id: 'mlkg90', label: Strings.movieListSorting.name, isSelected: false },
-];
-
 const MoviesList = () => {
   const [isLoading, setIsLoading] = useState(true);
 
-  const [genres, setGenres] = useState(allGenres);
+  const [genres, setGenres] = useState(ALL_GENRES);
   const [selectedGenre, setSelectedGenre] = useState(genres[0]);
 
-  const [sortTypes, setSortTypes] = useState(sortingTypes);
+  const [sortTypes, setSortTypes] = useState(AVAILABLE_TYPES_FOR_SORTING);
 
   const [movieList, setMovieList] = useState([]);
 
@@ -46,7 +35,7 @@ const MoviesList = () => {
   };
 
   const sortMoviesByGenre = list => {
-    return list.filter(movie => movie.genres.includes(selectedGenre.title));
+    return list.filter(movie => movie.genres.includes(selectedGenre.label));
   };
 
   const onSortTypeClick = type => {
@@ -64,7 +53,7 @@ const MoviesList = () => {
 
     const response = await getMovieGenres();
     setMovieList(
-      selectedGenre.title === Strings.movieGenres.all
+      selectedGenre.label === Strings.movieGenres.all
         ? response.data
         : sortMoviesByGenre(response.data),
     );
