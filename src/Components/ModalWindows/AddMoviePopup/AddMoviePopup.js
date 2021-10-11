@@ -3,15 +3,22 @@ import PropTypes from 'prop-types';
 
 import { Popup, POPUP_SIZE } from '../../Popup/Popup';
 import { ADD_MOVIE_GENRES } from '../../../Utils/Constants';
+import DatePicker from '../../CustomInputs/DatePicker/DatePicker';
+import CustomTextarea from '../../CustomInputs/CustomTextarea/CustomTextarea';
 import DropdownSelect from '../../CustomInputs/DropdownSelect/DropdownSelect';
 import { CustomInput, AVAILABLE_INPUT_TYPES } from '../../CustomInputs/CustomInput/CustomInput';
 
 import Strings from '../../../Utils/Strings';
 import Styles from './AddMoviePopup.module.scss';
-import DatePicker from '../../CustomInputs/DatePicker/DatePicker';
 
 const AddMoviePopup = ({ isOpen = false, closeMethod = () => {} }) => {
+  const [url, setUrl] = useState('');
+  const [rate, setRate] = useState('');
   const [title, setTitle] = useState('');
+  const [runtime, setRuntime] = useState('');
+
+  const [description, setDescription] = useState('');
+
   const [selectedGenres, setSelectedGenres] = useState(ADD_MOVIE_GENRES);
 
   const onSelectGenre = id => {
@@ -32,22 +39,62 @@ const AddMoviePopup = ({ isOpen = false, closeMethod = () => {} }) => {
       title={Strings.popupTitle.addMovie}
       closeMethod={() => closeMethod()}
     >
-      <CustomInput
-        title={Strings.inputs.movieTitle.title}
-        type={AVAILABLE_INPUT_TYPES.TEXT}
-        placeholder={Strings.inputs.movieTitle.placeholder}
-        value={title}
-        onChange={e => setTitle(e.target.value)}
+      <section className={Styles.inputsContainer}>
+        {/* TITLE */}
+        <CustomInput
+          title={Strings.inputs.movieTitle.title}
+          type={AVAILABLE_INPUT_TYPES.TEXT}
+          placeholder={Strings.inputs.movieTitle.placeholder}
+          value={title}
+          onChange={e => setTitle(e.target.value)}
+        />
+
+        {/* RELEASE DATE */}
+        <DatePicker title={Strings.inputs.releaseDate.title} />
+
+        {/* MOVIE URL */}
+        <CustomInput
+          title={Strings.inputs.movieUrl.title}
+          type={AVAILABLE_INPUT_TYPES.TEXT}
+          placeholder={Strings.inputs.movieUrl.placeholder}
+          value={url}
+          onChange={e => setUrl(e.target.value)}
+        />
+
+        {/* RATING */}
+        <CustomInput
+          title={Strings.inputs.rating.title}
+          type={AVAILABLE_INPUT_TYPES.NUMBER}
+          placeholder={Strings.inputs.rating.placeholder}
+          value={rate}
+          onChange={e => setRate(e.target.value)}
+        />
+
+        {/* GENRES */}
+        <DropdownSelect
+          title={Strings.inputs.genre.title}
+          placeholder={Strings.inputs.genre.placeholder}
+          data={selectedGenres}
+          onItemSelect={onSelectGenre}
+        />
+
+        {/* RUNTIME */}
+        <CustomInput
+          title={Strings.inputs.runtime.title}
+          type={AVAILABLE_INPUT_TYPES.NUMBER}
+          placeholder={Strings.inputs.runtime.placeholder}
+          value={runtime}
+          onChange={e => setRuntime(e.target.value)}
+        />
+      </section>
+
+      <CustomTextarea
+        title={Strings.inputs.overview.title}
+        placeholder={Strings.inputs.overview.placeholder}
+        value={description}
+        onChangeValue={(e) => setDescription(e.target.value)}
       />
 
-      <DropdownSelect
-        title={Strings.inputs.genre.title}
-        placeholder={Strings.inputs.genre.placeholder}
-        data={selectedGenres}
-        onItemSelect={onSelectGenre}
-      />
-
-      <DatePicker title={Strings.inputs.releaseDate.title} />
     </Popup>
   );
 };

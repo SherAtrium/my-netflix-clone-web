@@ -36,8 +36,8 @@
 			max-height: 80vh;
 
 			cursor: auto;
-			padding: 2rem;
-			//overflow: auto;
+			padding: 2.5rem;
+			overflow: auto;
 			box-sizing: border-box;
 			background-color: $gray_dark;
 			border-radius: $borderRadius_8;
@@ -46,6 +46,28 @@
 
 			-webkit-animation: fade-in-top 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) 0.2s both;
 			animation: fade-in-top 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) 0.2s both;
+
+
+			&::-webkit-scrollbar-track {
+				background: transparent;
+			}
+
+			&::-webkit-scrollbar-thumb {
+				background-color: $gray_secondary;
+				border-radius: $borderRadius_4;
+
+				&:hover {
+					background-color: $gray_tertiary;
+				}
+			}
+
+			&::-webkit-scrollbar-track-piece:end {
+				margin-bottom: 1rem;
+			}
+
+			&::-webkit-scrollbar-track-piece:start {
+				margin-top: 1rem;
+			}
 
 			.popupContentHeader {
 				position: relative;
