@@ -1,0 +1,38 @@
+@import "../../../MainStyles/variables";
+
+.datePicker {
+	max-width: 100%;
+	margin: 1rem;
+
+	p.title {
+		margin:0 0 0.75rem 0;
+
+		color: $red;
+		font-weight: 600;
+		text-transform: uppercase;
+	}
+
+	input {
+		width: 100%;
+		height: 3rem;
+		padding: 0 1rem;
+
+		border: none;
+		outline: none;
+
+		box-sizing: border-box;
+
+		color: $white;
+		font-size: $fontSize_16;
+
+		text-transform: uppercase;
+		border-radius: $borderRadius_4;
+		background: $gray_dark_additional;
+
+		transition: box-shadow .2s ease-in-out;
+
+		&:focus {
+			box-shadow: 0 2px 0 $alpha_red_primary;
+		}
+	}
+}

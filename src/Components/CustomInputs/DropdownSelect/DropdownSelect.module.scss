@@ -37,6 +37,13 @@
 		border-radius: $borderRadius_4;
 		background: $gray_dark_additional;
 
+		span {
+			font-weight: 300;
+			font-size: $fontSize_16;
+			text-transform: initial;
+			color: $gray_input_placeholder;
+		}
+
 		li {
 			margin: 0 0.25rem;
 			padding: .5rem .75rem;

@@ -32,7 +32,7 @@ export default {
     },
     genre: {
       title: 'Genre',
-      placeholder: 'Select Genre',
+      placeholder: 'Select genre',
     },
     runtime: {
       title: 'Runtime',

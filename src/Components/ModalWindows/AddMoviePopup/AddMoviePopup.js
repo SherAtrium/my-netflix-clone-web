@@ -8,6 +8,7 @@ import { CustomInput, AVAILABLE_INPUT_TYPES } from '../../CustomInputs/CustomInp
 
 import Strings from '../../../Utils/Strings';
 import Styles from './AddMoviePopup.module.scss';
+import DatePicker from '../../CustomInputs/DatePicker/DatePicker';
 
 const AddMoviePopup = ({ isOpen = false, closeMethod = () => {} }) => {
   const [title, setTitle] = useState('');
@@ -39,7 +40,14 @@ const AddMoviePopup = ({ isOpen = false, closeMethod = () => {} }) => {
         onChange={e => setTitle(e.target.value)}
       />
 
-      <DropdownSelect data={selectedGenres} onItemSelect={onSelectGenre} />
+      <DropdownSelect
+        title={Strings.inputs.genre.title}
+        placeholder={Strings.inputs.genre.placeholder}
+        data={selectedGenres}
+        onItemSelect={onSelectGenre}
+      />
+
+      <DatePicker title={Strings.inputs.releaseDate.title} />
     </Popup>
   );
 };

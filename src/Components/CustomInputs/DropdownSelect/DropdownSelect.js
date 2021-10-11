@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import { useEffect, useRef } from 'react';
 import useToggle from '../../CustomHooks/useToggle';
 
-import Strings from '../../../Utils/Strings';
 import Styles from './DropdownSelect.module.scss';
 
 const getSelectedItemsLabel = data => {
@@ -12,7 +11,7 @@ const getSelectedItemsLabel = data => {
   return selectedItems;
 };
 
-const DropdownSelect = ({ data = [], onItemSelect = () => {} }) => {
+const DropdownSelect = ({ title = '', placeholder = '', data = [], onItemSelect = () => {} }) => {
   const dropdownRef = useRef();
 
   const [visible, toggleVisible, setVisible] = useToggle(false);
@@ -30,13 +29,15 @@ const DropdownSelect = ({ data = [], onItemSelect = () => {} }) => {
 
   return (
     <div className={Styles.dropdownContainer}>
-      <p>{Strings.inputs.genre.title}</p>
+      <p>{title}</p>
 
       <div ref={dropdownRef}>
         <ul className={Styles.dropdown} onClick={toggleVisible}>
-          {selectedItems.map(i => (
-            <li key={i}>{i}</li>
-          ))}
+          {selectedItems.length > 0 ? (
+            selectedItems.map(i => <li key={i}>{i}</li>)
+          ) : (
+            <span>{placeholder}</span>
+          )}
         </ul>
 
         {visible && (
@@ -62,6 +63,8 @@ const DropdownSelect = ({ data = [], onItemSelect = () => {} }) => {
 };
 
 DropdownSelect.propTypes = {
+  title: PropTypes.string,
+  placeholder: PropTypes.string,
   data: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string || PropTypes.number,
