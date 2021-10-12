@@ -18,7 +18,12 @@ const CustomInput = ({
     <div className={Styles.customInput}>
       <p className={Styles.title}>{title}</p>
 
-      <input type={type} placeholder={placeholder} value={value} onChange={onChange} />
+      <input
+        type={type}
+        placeholder={placeholder}
+        value={value}
+        onChange={e => onChange(e.target.value)}
+      />
     </div>
   );
 };

@@ -29,6 +29,18 @@
 
 		transition: box-shadow .2s ease-in-out;
 
+		/* Chrome, Safari, Edge, Opera */
+		&::-webkit-outer-spin-button,
+		&::-webkit-inner-spin-button {
+			-webkit-appearance: none;
+			margin: 0;
+		}
+
+		/* Firefox */
+		&[type=number] {
+			-moz-appearance: textfield;
+		}
+
 		&:focus {
 			box-shadow: 0 2px 0 $alpha_red_primary;
 		}
