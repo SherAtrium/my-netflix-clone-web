@@ -2,9 +2,8 @@ import FakeApiData from './FakeApiData.json';
 
 export const getMovieGenres = () => {
   return new Promise(resolve => {
+    const partOfMovies = FakeApiData.data.filter((item, idx) => idx < 20);
     setTimeout(() => {
-      const partOfMovies = FakeApiData.data.filter((item, idx) => idx < 20);
-
       resolve({
         totalAmount: 3000,
         data: partOfMovies,

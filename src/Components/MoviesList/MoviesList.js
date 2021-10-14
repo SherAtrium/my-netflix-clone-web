@@ -17,22 +17,20 @@ import {
 import Strings from '../../Utils/Strings';
 import Styles from './MoviesList.module.scss';
 
+const findSelectedSort = data => data.filter(i => i.isSelected)[0];
+
 const MoviesList = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const [genres, setGenres] = useState(ALL_GENRES);
   const [selectedGenre, setSelectedGenre] = useState(genres[0]);
 
+  const [movieList, setMovieList] = useState([]);
+
   const [sortTypes, setSortTypes] = useState(AVAILABLE_TYPES_FOR_SORTING);
   const [selectedSortType, setSelectedSortType] = useState(findSelectedSort(sortTypes));
 
-  const [movieList, setMovieList] = useState([]);
-
   const findSelectedGenre = id => genres.find(i => i.id === id);
-
-  function findSelectedSort(data) {
-    return data.filter(i => i.isSelected)[0];
-  }
 
   const onSelectGenre = id => {
     setSelectedGenre(findSelectedGenre(id));
@@ -46,12 +44,13 @@ const MoviesList = () => {
   };
 
   const sortingMovies = data => {
-    switch (findSelectedSort(sortTypes).label) {
+    switch (selectedSortType.label) {
       case SORT_BY_RELEASE_DATE:
         return sortByReleaseDate(data);
 
       case SORT_BY_NAME:
         return sortByName(data);
+
       default:
         return data;
     }
@@ -68,6 +67,7 @@ const MoviesList = () => {
         isSelected: item.id === type.id,
       }));
     });
+    setSelectedSortType(type);
   };
 
   useEffect(async () => {
@@ -83,7 +83,7 @@ const MoviesList = () => {
     );
 
     setIsLoading(false);
-  }, [genres]);
+  }, [genres, selectedSortType]);
 
   return (
     <>

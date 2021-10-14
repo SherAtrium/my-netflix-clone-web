@@ -22,6 +22,13 @@ export const sortByReleaseDate = data => {
 };
 
 export const sortByName = data => {
-
-  return data;
+  return [...data].sort((first, second) => {
+    if (first.title < second.title) {
+      return -1;
+    }
+    if (first.title > second.title) {
+      return 1;
+    }
+    return 0;
+  });
 };
