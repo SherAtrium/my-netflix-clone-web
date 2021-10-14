@@ -5,8 +5,14 @@ import Loader from '../Loader/Loader';
 import MovieCard from './MovieCard/MovieCard';
 import MovieGenres from './MovieGenres/MovieGenres';
 import { getMovieGenres } from '../../Services/FakeApi';
+import { sortByName, sortByReleaseDate } from './helper';
 import MoviesListSort from './MoviesListSort/MoviesListSort';
-import { ALL_GENRES, AVAILABLE_TYPES_FOR_SORTING } from '../../Utils/Constants';
+import {
+  ALL_GENRES,
+  SORT_BY_NAME,
+  SORT_BY_RELEASE_DATE,
+  AVAILABLE_TYPES_FOR_SORTING,
+} from '../../Utils/Constants';
 
 import Strings from '../../Utils/Strings';
 import Styles from './MoviesList.module.scss';
@@ -18,10 +24,15 @@ const MoviesList = () => {
   const [selectedGenre, setSelectedGenre] = useState(genres[0]);
 
   const [sortTypes, setSortTypes] = useState(AVAILABLE_TYPES_FOR_SORTING);
+  const [selectedSortType, setSelectedSortType] = useState(findSelectedSort(sortTypes));
 
   const [movieList, setMovieList] = useState([]);
 
   const findSelectedGenre = id => genres.find(i => i.id === id);
+
+  function findSelectedSort(data) {
+    return data.filter(i => i.isSelected)[0];
+  }
 
   const onSelectGenre = id => {
     setSelectedGenre(findSelectedGenre(id));
@@ -32,6 +43,18 @@ const MoviesList = () => {
         isActive: item.id === id,
       }));
     });
+  };
+
+  const sortingMovies = data => {
+    switch (findSelectedSort(sortTypes).label) {
+      case SORT_BY_RELEASE_DATE:
+        return sortByReleaseDate(data);
+
+      case SORT_BY_NAME:
+        return sortByName(data);
+      default:
+        return data;
+    }
   };
 
   const sortMoviesByGenre = list => {
@@ -52,10 +75,11 @@ const MoviesList = () => {
     setMovieList([]);
 
     const response = await getMovieGenres();
+
     setMovieList(
       selectedGenre.label === Strings.movieGenres.all
-        ? response.data
-        : sortMoviesByGenre(response.data),
+        ? sortingMovies(response.data)
+        : sortMoviesByGenre(sortingMovies(response.data)),
     );
 
     setIsLoading(false);
