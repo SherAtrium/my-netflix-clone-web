@@ -1,3 +1,4 @@
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { useEffect, useRef } from 'react';
@@ -31,20 +32,23 @@ const Popup = ({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  return isOpen ? (
-    <div className={Styles.popup}>
-      <div className={Styles.popupOverlay}>
-        <div className={classNames(Styles.popupContent, popupSize)} ref={popupRef}>
-          <div className={Styles.popupContentHeader}>
-            {title && <p className={Styles.title}>{title}</p>}
-            {isAvailableCloseBtn && <span className={Styles.popupClose} onClick={closeMethod} />}
-          </div>
+  return ReactDOM.createPortal(
+    isOpen ? (
+      <div className={Styles.popup}>
+        <div className={Styles.popupOverlay}>
+          <div className={classNames(Styles.popupContent, popupSize)} ref={popupRef}>
+            <div className={Styles.popupContentHeader}>
+              {title && <p className={Styles.title}>{title}</p>}
+              {isAvailableCloseBtn && <span className={Styles.popupClose} onClick={closeMethod} />}
+            </div>
 
-          {children}
+            {children}
+          </div>
         </div>
       </div>
-    </div>
-  ) : null;
+    ) : null,
+    document.getElementById('portal'),
+  );
 };
 
 Popup.propTypes = {
