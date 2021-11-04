@@ -62,4 +62,8 @@ export default {
     congratulations: 'Congratulations',
     ligIn: 'Log in',
   },
+  movieOptions: {
+    edit: 'Edit',
+    delete: 'Delete',
+  }
 };
