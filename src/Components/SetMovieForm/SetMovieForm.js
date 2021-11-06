@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
 import DatePicker from '../CustomInputs/DatePicker/DatePicker';
 import DropdownSelect from '../CustomInputs/DropdownSelect/DropdownSelect';
@@ -6,24 +7,33 @@ import CustomTextarea from '../CustomInputs/CustomTextarea/CustomTextarea';
 import { AVAILABLE_INPUT_TYPES, CustomInput } from '../CustomInputs/CustomInput/CustomInput';
 import { Button, BUTTON_COLOR, BUTTON_SIZE, BUTTON_STYLE, BUTTON_TYPE } from '../Button/Button';
 
-import { ADD_MOVIE_GENRES } from '../../Utils/Constants';
+import { SET_MOVIE_GENRES } from '../../Utils/Constants';
 
 import Strings from '../../Utils/Strings';
 import Styles from './SetMovieForm.module.scss';
 
-const SetMovieForm = () => {
+const SetMovieForm = ({ movieData = null }) => {
   const [url, setUrl] = useState('');
-  const [date, setDate] = useState('');
-  const [rate, setRate] = useState('');
-  const [title, setTitle] = useState('');
-  const [runtime, setRuntime] = useState('');
+  const [rate, setRate] = useState(movieData?.rating || '');
+  const [title, setTitle] = useState(movieData?.title || '');
+  const [date, setDate] = useState(movieData?.releaseDate || '');
+  const [runtime, setRuntime] = useState(movieData?.runtime || '');
+  const [description, setDescription] = useState(movieData?.overview || '');
 
-  const [description, setDescription] = useState('');
+  const generateGenres = () => {
+    if (movieData) {
+      return SET_MOVIE_GENRES.map(item => ({
+        ...item,
+        selected: movieData.genres.includes(item.label),
+      }));
+    }
+    return SET_MOVIE_GENRES;
+  };
 
-  const [selectedGenres, setSelectedGenres] = useState(ADD_MOVIE_GENRES);
+  const [genres, setGenres] = useState(generateGenres());
 
   const onSelectGenre = id => {
-    setSelectedGenres(prevState => {
+    setGenres(prevState => {
       return prevState.map(item => ({
         ...item,
         selected: item.id === id ? !item.selected : item.selected,
@@ -32,7 +42,7 @@ const SetMovieForm = () => {
   };
 
   const unselectGenres = () => {
-    setSelectedGenres(prevState => {
+    setGenres(prevState => {
       return prevState.map(item => ({ ...item, selected: false }));
     });
   };
@@ -56,7 +66,7 @@ const SetMovieForm = () => {
       rate,
       title,
       runtime,
-      selectedGenres,
+      genres,
       description,
     });
   };
@@ -98,7 +108,7 @@ const SetMovieForm = () => {
         <DropdownSelect
           title={Strings.inputs.genre.title}
           placeholder={Strings.inputs.genre.placeholder}
-          data={selectedGenres}
+          data={genres}
           onItemSelect={onSelectGenre}
         />
 
@@ -146,6 +156,10 @@ const SetMovieForm = () => {
       </div>
     </form>
   );
+};
+
+SetMovieForm.propTypes = {
+  movieData: PropTypes.object,
 };
 
 export default SetMovieForm;

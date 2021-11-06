@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-const convertDateToObj = string => {
+export const convertDateToObj = string => {
   const splitted = string.split('-');
   return {
     year: splitted[0],

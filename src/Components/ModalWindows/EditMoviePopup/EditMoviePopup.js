@@ -1,19 +1,38 @@
 import PropTypes from 'prop-types';
-import Strings from '../../../Utils/Strings';
 import { Popup, POPUP_SIZE } from '../../Popup/Popup';
 import SetMovieForm from '../../SetMovieForm/SetMovieForm';
 
-const EditMoviePopup = ({ isOpen = false, closeMethod = () => {} }) => {
+import Strings from '../../../Utils/Strings';
+
+const EditMoviePopup = ({ isOpen = false, closeMethod = () => {}, movieData = {} }) => {
+  let MovieDataObject = null;
+
+  if (isOpen) {
+    // eslint-disable-next-line camelcase
+    const { title, release_date, vote_average, genres, runtime, overview } = movieData;
+
+    MovieDataObject = {
+      title,
+      genres,
+      overview,
+      movieUrl: null, // there is no movie url in data
+      runtime,
+      // eslint-disable-next-line camelcase
+      rating: +vote_average,
+      releaseDate: release_date,
+    };
+  }
+
   return (
     <Popup
       isOpen={isOpen}
       isClickableOverlay
       isAvailableCloseBtn
       popupSize={POPUP_SIZE.LARGE}
-      title={Strings.popupTitle.addMovie}
+      title={Strings.popupTitle.editMovie}
       closeMethod={() => closeMethod()}
     >
-      <SetMovieForm />
+      <SetMovieForm movieData={MovieDataObject} />
     </Popup>
   );
 };
@@ -21,6 +40,7 @@ const EditMoviePopup = ({ isOpen = false, closeMethod = () => {} }) => {
 EditMoviePopup.propTypes = {
   isOpen: PropTypes.bool,
   closeMethod: PropTypes.func,
+  movieData: PropTypes.object,
 };
 
 export default EditMoviePopup;

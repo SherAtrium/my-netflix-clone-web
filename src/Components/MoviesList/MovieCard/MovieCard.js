@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
-import { useEffect, useRef } from 'react';
-
 import classNames from 'classnames';
+import { useEffect, useRef, useState } from 'react';
 import useToggle from '../../CustomHooks/useToggle';
 
-import Strings from '../../../Utils/Strings';
+import EditMoviePopup from '../../ModalWindows/EditMoviePopup/EditMoviePopup';
+
 import Styles from './MovieCard.module.scss';
+import Strings from '../../../Utils/Strings';
 
 const options = [
   { id: 'h89h0', label: Strings.movieOptions.edit },
@@ -14,10 +15,21 @@ const options = [
 
 const MovieCard = ({ movieData = {} }) => {
   const optionsRef = useRef();
+  const [editMoviePopup, setEditMoviePopup] = useState(false);
   const [visible, toggleVisible, setVisible] = useToggle(false);
 
   const handleClickOutside = e => {
     if (optionsRef.current && !optionsRef.current.contains(e.target)) setVisible(false);
+  };
+
+  const onClickMovieOption = type => {
+    if (type.label === Strings.movieOptions.edit) {
+      setEditMoviePopup(true);
+    }
+
+    if (type.label === Strings.movieOptions.delete) {
+      // ...
+    }
   };
 
   useEffect(() => {
@@ -27,6 +39,12 @@ const MovieCard = ({ movieData = {} }) => {
 
   return (
     <div className={Styles.movie}>
+      <EditMoviePopup
+        isOpen={editMoviePopup}
+        closeMethod={setEditMoviePopup}
+        movieData={movieData}
+      />
+
       <div
         className={classNames(Styles.options, { [`${Styles.isFocused}`]: visible })}
         ref={optionsRef}
@@ -39,7 +57,7 @@ const MovieCard = ({ movieData = {} }) => {
         {visible && (
           <ul className={Styles.movieOptionList}>
             {options.map(type => (
-              <li key={type.id} onClick={() => console.log(type)}>
+              <li key={type.id} onClick={() => onClickMovieOption(type)}>
                 {type.label}
               </li>
             ))}

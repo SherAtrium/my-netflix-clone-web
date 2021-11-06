@@ -11,7 +11,7 @@ export const ALL_GENRES = [
   { id: '90bcv', label: Strings.movieGenres.crime, isActive: false },
 ];
 
-export const ADD_MOVIE_GENRES = [
+export const SET_MOVIE_GENRES = [
   { id: 'lkm23', label: Strings.movieGenres.all, selected: false },
   { id: '98zxc', label: Strings.movieGenres.documentary, selected: false },
   { id: '0vice', label: Strings.movieGenres.comedy, selected: false },
