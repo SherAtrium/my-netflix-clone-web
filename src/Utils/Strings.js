@@ -8,6 +8,7 @@ export default {
     search: 'Search',
     reset: 'Reset',
     submit: 'Submit',
+    confirm: 'Confirm',
   },
   inputs: {
     searchBar: {
@@ -62,8 +63,11 @@ export default {
     congratulations: 'Congratulations',
     ligIn: 'Log in',
   },
+  popupContent: {
+    confirmDelete: 'Are you sure you want to delete this movie?',
+  },
   movieOptions: {
     edit: 'Edit',
     delete: 'Delete',
-  }
+  },
 };
