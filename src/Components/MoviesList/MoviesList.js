@@ -5,32 +5,30 @@ import Loader from '../Loader/Loader';
 import MovieCard from './MovieCard/MovieCard';
 import MovieGenres from './MovieGenres/MovieGenres';
 import { getMovieGenres } from '../../Services/FakeApi';
+import { sortByName, sortByReleaseDate } from './helper';
 import MoviesListSort from './MoviesListSort/MoviesListSort';
+import {
+  ALL_GENRES,
+  SORT_BY_NAME,
+  SORT_BY_RELEASE_DATE,
+  AVAILABLE_TYPES_FOR_SORTING,
+} from '../../Utils/Constants';
 
 import Strings from '../../Utils/Strings';
 import Styles from './MoviesList.module.scss';
 
-const allGenres = [
-  { id: 'lkm23', title: Strings.movieGenres.all, isActive: true },
-  { id: '98zxc', title: Strings.movieGenres.documentary, isActive: false },
-  { id: '0vice', title: Strings.movieGenres.comedy, isActive: false },
-  { id: 'as9da', title: Strings.movieGenres.horror, isActive: false },
-  { id: '90bcv', title: Strings.movieGenres.crime, isActive: false },
-];
-const sortingTypes = [
-  { id: 'zxc323', label: Strings.movieListSorting.releaseDate, isSelected: true },
-  { id: 'mlkg90', label: Strings.movieListSorting.name, isSelected: false },
-];
+const findSelectedSort = data => data.filter(i => i.isSelected)[0];
 
 const MoviesList = () => {
   const [isLoading, setIsLoading] = useState(true);
 
-  const [genres, setGenres] = useState(allGenres);
+  const [genres, setGenres] = useState(ALL_GENRES);
   const [selectedGenre, setSelectedGenre] = useState(genres[0]);
 
-  const [sortTypes, setSortTypes] = useState(sortingTypes);
-
   const [movieList, setMovieList] = useState([]);
+
+  const [sortTypes, setSortTypes] = useState(AVAILABLE_TYPES_FOR_SORTING);
+  const [selectedSortType, setSelectedSortType] = useState(findSelectedSort(sortTypes));
 
   const findSelectedGenre = id => genres.find(i => i.id === id);
 
@@ -45,8 +43,21 @@ const MoviesList = () => {
     });
   };
 
+  const sortingMovies = data => {
+    switch (selectedSortType.label) {
+      case SORT_BY_RELEASE_DATE:
+        return sortByReleaseDate(data);
+
+      case SORT_BY_NAME:
+        return sortByName(data);
+
+      default:
+        return data;
+    }
+  };
+
   const sortMoviesByGenre = list => {
-    return list.filter(movie => movie.genres.includes(selectedGenre.title));
+    return list.filter(movie => movie.genres.includes(selectedGenre.label));
   };
 
   const onSortTypeClick = type => {
@@ -56,6 +67,7 @@ const MoviesList = () => {
         isSelected: item.id === type.id,
       }));
     });
+    setSelectedSortType(type);
   };
 
   useEffect(async () => {
@@ -63,14 +75,15 @@ const MoviesList = () => {
     setMovieList([]);
 
     const response = await getMovieGenres();
+
     setMovieList(
-      selectedGenre.title === Strings.movieGenres.all
-        ? response.data
-        : sortMoviesByGenre(response.data),
+      selectedGenre.label === Strings.movieGenres.all
+        ? sortingMovies(response.data)
+        : sortMoviesByGenre(sortingMovies(response.data)),
     );
 
     setIsLoading(false);
-  }, [genres]);
+  }, [genres, selectedSortType]);
 
   return (
     <>

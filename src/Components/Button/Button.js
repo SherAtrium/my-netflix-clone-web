@@ -18,7 +18,14 @@ const BUTTON_SIZE = {
   SMALL: Styles.btnSm,
 };
 
+const BUTTON_TYPE = {
+  BUTTON: 'button',
+  SUBMIT: 'submit',
+  RESET: 'reset',
+};
+
 const Button = ({
+  type = BUTTON_TYPE.BUTTON,
   tooltip = '',
   children = null,
   isDisable = false,
@@ -29,7 +36,7 @@ const Button = ({
 }) => {
   return (
     <button
-      type='button'
+      type={type}
       className={classNames(Styles.button, btnStyle, btnColor, btnSize)}
       onClick={(...params) => onClick(...params)}
       disabled={isDisable}
@@ -41,6 +48,7 @@ const Button = ({
 };
 
 Button.propTypes = {
+  type: PropTypes.string,
   onClick: PropTypes.func,
   children: PropTypes.node,
   isDisable: PropTypes.bool,
@@ -50,4 +58,4 @@ Button.propTypes = {
   btnSize: PropTypes.string,
 };
 
-export { Button, BUTTON_SIZE, BUTTON_COLOR, BUTTON_STYLE };
+export { Button, BUTTON_SIZE, BUTTON_COLOR, BUTTON_STYLE, BUTTON_TYPE };

@@ -1,0 +1,37 @@
+@import "../../../MainStyles/variables";
+
+.CustomTextarea {
+	max-width: 100%;
+
+	p.title {
+		margin:0 0 0.75rem 0;
+
+		color: $red;
+		font-weight: 600;
+		text-transform: uppercase;
+	}
+
+	textarea {
+		width: 100%;
+		min-height: 8rem;
+		padding: 1rem;
+
+		border: none;
+		outline: none;
+		resize: none;
+
+		box-sizing: border-box;
+
+		color: $white;
+		font-size: $fontSize_16;
+
+		border-radius: $borderRadius_4;
+		background: $gray_dark_additional;
+
+		transition: box-shadow .2s ease-in-out;
+
+		&:focus {
+			box-shadow: 0 2px 0 $alpha_red_primary;
+		}
+	}
+}

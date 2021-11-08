@@ -1,0 +1,12 @@
+@import "../../../MainStyles/variables";
+
+.popupContent {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+
+	p {
+		width: 100%;
+		margin: 1.5rem 0;
+	}
+}

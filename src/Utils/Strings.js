@@ -8,11 +8,40 @@ export default {
     search: 'Search',
     reset: 'Reset',
     submit: 'Submit',
+    confirm: 'Confirm',
   },
   inputs: {
     searchBar: {
       title: 'Find Your Movie',
       placeholder: 'What do you want to watch?',
+    },
+    movieTitle: {
+      title: 'Title',
+      placeholder: 'Movie title',
+    },
+    releaseDate: {
+      title: 'Release Date',
+      placeholder: 'Select Date',
+    },
+    movieUrl: {
+      title: 'Movie URL',
+      placeholder: 'https://',
+    },
+    rating: {
+      title: 'Rating',
+      placeholder: '7.8',
+    },
+    genre: {
+      title: 'Genre',
+      placeholder: 'Select genre',
+    },
+    runtime: {
+      title: 'Runtime',
+      placeholder: 'Minutes',
+    },
+    overview: {
+      title: 'Overview',
+      placeholder: 'Movie description',
     },
   },
   movieGenres: {
@@ -26,5 +55,19 @@ export default {
     sortBy: 'Sort by',
     releaseDate: 'Release Date',
     name: 'Name',
+  },
+  popupTitle: {
+    addMovie: 'Add Movie',
+    editMovie: 'Edit Movie',
+    deleteMovie: 'Delete Movie',
+    congratulations: 'Congratulations',
+    ligIn: 'Log in',
+  },
+  popupContent: {
+    confirmDelete: 'Are you sure you want to delete this movie?',
+  },
+  movieOptions: {
+    edit: 'Edit',
+    delete: 'Delete',
   },
 };

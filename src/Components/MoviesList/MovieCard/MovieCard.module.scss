@@ -1,6 +1,8 @@
 @import "../../../MainStyles/variables";
 
 .movie {
+	position: relative;
+
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
@@ -10,6 +12,62 @@
 
 	cursor: pointer;
 	box-sizing: border-box;
+
+	.options {
+		position: absolute;
+		top: .75rem;
+		right: .75rem;
+
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		justify-content: center;
+
+		width: 2.25rem;
+		height: 2.25rem;
+
+		border-radius: 50%;
+		background-color: $gray_dark;
+
+		z-index: 2;
+
+		opacity: 0;
+		transition: opacity .3s ease-in-out;
+
+		&.isFocused {
+			opacity: 1;
+		}
+
+		span.dot {
+			user-select: none;
+			line-height: .4rem;
+		}
+
+		ul.movieOptionList {
+			position: absolute;
+			top: 2.5rem;
+			right: 0;
+			margin: 0;
+			padding: 0;
+			width: 8rem;
+			overflow: hidden;
+			list-style-type: none;
+			background-color: $gray_dark;
+			border-radius: $borderRadius_4;
+
+			li {
+				padding: .65rem 1rem;
+
+				&:hover {
+					background-color: $red;
+				}
+			}
+		}
+	}
+
+	&:hover .options {
+		opacity: 1;
+	}
 
 	.imgContainer {
 		position: relative;

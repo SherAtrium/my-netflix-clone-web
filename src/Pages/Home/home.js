@@ -1,5 +1,5 @@
-import Header from '../../Components/Header/Header';
 import Footer from '../../Components/Footer/Footer';
+import Header from '../../Components/Header/Header';
 import MoviesList from '../../Components/MoviesList/MoviesList';
 import ErrorBoundary from '../../Components/ErrorBoundary/ErrorBoundary';
 
