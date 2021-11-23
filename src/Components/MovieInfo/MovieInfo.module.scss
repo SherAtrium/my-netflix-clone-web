@@ -1,0 +1,97 @@
+@import "../../MainStyles/variables";
+
+header.movieInfoContainer {
+	border-bottom: 10px solid $gray_secondary;
+
+	section {
+		margin-bottom: 1rem;
+
+		.logoSection {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			justify-content: space-between;
+
+			img {
+				width: 1.5rem;
+				cursor: pointer;
+			}
+		}
+
+		main {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			box-sizing: border-box;
+
+			.moviePhoto {
+				width: 25%;
+				box-sizing: border-box;
+
+
+				img {
+					width: 100%;
+					border-radius: $borderRadius_4;
+				}
+			}
+
+			.movieInfo {
+				width: calc(75% - 2rem);
+				padding: 0.5rem;
+				box-sizing: border-box;
+
+
+				.movieTitleAndRate {
+					display: flex;
+
+					h3 {
+						font-weight: 300;
+						font-size: $fontSize_32;
+						text-transform: uppercase;
+						margin: .5rem 1.5rem 1rem 0;
+					}
+
+					.rate {
+						display: flex;
+						align-items: center;
+						justify-content: center;
+
+						width: 3.5rem;
+						height: 3.5rem;
+
+						border-radius: 50%;
+						border: 1px solid $white;
+
+						span {
+							font-weight: 300;
+							font-size: $fontSize_18;
+						}
+					}
+				}
+
+				span.genres {
+					color: $gray_tertiary;
+					font-size: $fontSize_13;
+				}
+
+				.dateAndRuntime {
+					display: flex;
+
+					p {
+						color: $red;
+						font-weight: 300;
+						margin-right: 2.5rem;
+						font-size: $fontSize_24;
+					}
+				}
+
+				p.description {
+					font-weight: 300;
+					line-height: 24px;
+					color: $gray_tertiary;
+					font-size: $fontSize_18;
+				}
+			}
+		}
+	}
+}
