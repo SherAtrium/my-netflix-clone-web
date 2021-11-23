@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 
 import classNames from 'classnames';
 import Loader from '../Loader/Loader';
@@ -20,7 +19,7 @@ import Styles from './MoviesList.module.scss';
 
 const findSelectedSort = data => data.filter(i => i.isSelected)[0];
 
-const MoviesList = ({ selectedMovie = () => {} }) => {
+const MoviesList = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const [genres, setGenres] = useState(ALL_GENRES);
@@ -99,15 +98,11 @@ const MoviesList = ({ selectedMovie = () => {} }) => {
         {movieList.length === 0 && !isLoading && <p>There are no films in this genre yet</p>}
 
         {movieList.map(i => (
-          <MovieCard key={i.id} movieData={i} onSelectMovie={selectedMovie} />
+          <MovieCard key={i.id} movieData={i} />
         ))}
       </section>
     </>
   );
-};
-
-MoviesList.propTypes = {
-  selectedMovie: PropTypes.func,
 };
 
 export default MoviesList;
