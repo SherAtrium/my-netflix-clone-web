@@ -47,7 +47,10 @@ const MovieCard = ({ movieData = {}, onSelectMovie = () => {} }) => {
       <div
         className={classNames(Styles.options, { [`${Styles.isFocused}`]: visible })}
         ref={optionsRef}
-        onClick={toggleVisible}
+        onClick={e => {
+          e.stopPropagation();
+          toggleVisible();
+        }}
       >
         <span className={Styles.dot}>&bull;</span>
         <span className={Styles.dot}>&bull;</span>

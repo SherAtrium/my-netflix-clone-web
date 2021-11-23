@@ -9,6 +9,8 @@ import Styles from './home.module.scss';
 const Home = () => {
   const [selectedMovie, setSelectedMovie] = useState(null);
 
+  console.log(selectedMovie);
+
   return (
     <ErrorBoundary>
       {selectedMovie ? 'Hey' : <Header />}
