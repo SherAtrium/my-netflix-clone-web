@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Footer from '../../Components/Footer/Footer';
 import Header from '../../Components/Header/Header';
+import MovieInfo from '../../Components/MovieInfo/MovieInfo';
 import MoviesList from '../../Components/MoviesList/MoviesList';
 import ErrorBoundary from '../../Components/ErrorBoundary/ErrorBoundary';
 
@@ -9,11 +10,13 @@ import Styles from './home.module.scss';
 const Home = () => {
   const [selectedMovie, setSelectedMovie] = useState(null);
 
-  console.log(selectedMovie);
-
   return (
     <ErrorBoundary>
-      {selectedMovie ? 'Hey' : <Header />}
+      {selectedMovie ? (
+        <MovieInfo data={selectedMovie} closeMovieInfo={() => setSelectedMovie(null)} />
+      ) : (
+        <Header />
+      )}
 
       <main className={Styles.mainWrapper}>
         <MoviesList selectedMovie={movie => setSelectedMovie(movie)} />
