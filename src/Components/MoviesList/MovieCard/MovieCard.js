@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import useToggle from '../../CustomHooks/useToggle';
 
 import EditMoviePopup from '../../ModalWindows/EditMoviePopup/EditMoviePopup';
@@ -29,6 +29,9 @@ const MovieCard = ({ movieData = {}, onSelectMovie = () => {} }) => {
     if (type.label === Strings.movieOptions.delete) setDeleteMoviePopup(true);
   };
 
+  const handleSetEditMoviePopup = useCallback(bool => setEditMoviePopup(bool), []);
+  const handleSetDeleteMoviePopup = useCallback(bool => setDeleteMoviePopup(bool), []);
+
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
@@ -38,11 +41,14 @@ const MovieCard = ({ movieData = {}, onSelectMovie = () => {} }) => {
     <div className={Styles.movie} onClick={() => onSelectMovie(movieData)}>
       <EditMoviePopup
         isOpen={editMoviePopup}
-        closeMethod={setEditMoviePopup}
+        closeMethod={() => handleSetEditMoviePopup(false)}
         movieData={movieData}
       />
 
-      <DeleteMoviePopup isOpen={deleteMoviePopup} closeMethod={setDeleteMoviePopup} />
+      <DeleteMoviePopup
+        isOpen={deleteMoviePopup}
+        closeMethod={() => handleSetDeleteMoviePopup(false)}
+      />
 
       <div
         className={classNames(Styles.options, { [`${Styles.isFocused}`]: visible })}

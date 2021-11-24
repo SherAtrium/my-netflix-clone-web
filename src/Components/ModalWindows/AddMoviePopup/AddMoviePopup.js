@@ -11,7 +11,7 @@ const AddMoviePopup = ({ isOpen = false, closeMethod = () => {} }) => {
       isAvailableCloseBtn
       popupSize={POPUP_SIZE.LARGE}
       title={Strings.popupTitle.addMovie}
-      closeMethod={() => closeMethod()}
+      closeMethod={closeMethod}
     >
       <SetMovieForm />
     </Popup>

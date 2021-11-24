@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import classNames from 'classnames';
@@ -33,7 +33,7 @@ const MoviesList = ({ selectedMovie = () => {} }) => {
 
   const findSelectedGenre = id => genres.find(i => i.id === id);
 
-  const onSelectGenre = id => {
+  const onSelectGenre = useCallback(id => {
     setSelectedGenre(findSelectedGenre(id));
 
     setGenres(prevState => {
@@ -42,7 +42,7 @@ const MoviesList = ({ selectedMovie = () => {} }) => {
         isActive: item.id === id,
       }));
     });
-  };
+  }, []);
 
   const sortingMovies = data => {
     switch (selectedSortType.label) {
@@ -61,7 +61,7 @@ const MoviesList = ({ selectedMovie = () => {} }) => {
     return list.filter(movie => movie.genres.includes(selectedGenre.label));
   };
 
-  const onSortTypeClick = type => {
+  const onSortTypeClick = useCallback(type => {
     setSortTypes(prevState => {
       return prevState.map(item => ({
         ...item,
@@ -69,7 +69,7 @@ const MoviesList = ({ selectedMovie = () => {} }) => {
       }));
     });
     setSelectedSortType(type);
-  };
+  }, []);
 
   useEffect(async () => {
     setIsLoading(true);
