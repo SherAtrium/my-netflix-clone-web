@@ -1,7 +1,4 @@
-import { GET_MOVIES_LIST } from '../ActionTypes';
+import { GET_MOVIES_IN_SUCCESS, GET_MOVIES_IN_PROGRESS } from './ActionTypes';
 
-const Actions = {
-  getMoviesList: movies => ({ type: GET_MOVIES_LIST, payload: movies }),
-};
-
-export default Actions;
+export const getMoviesInProgress = () => ({ type: GET_MOVIES_IN_PROGRESS });
+export const getMoviesInSuccess = movies => ({ type: GET_MOVIES_IN_SUCCESS, payload: movies });

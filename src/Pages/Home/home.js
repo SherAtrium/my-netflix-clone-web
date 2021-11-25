@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
-import { connect } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 
+import { moviesAPI } from '../../Services/Api';
 import Actions from '../../Store/Actions/ActionCreators';
 
 import Footer from '../../Components/Footer/Footer';
@@ -11,30 +12,25 @@ import ErrorBoundary from '../../Components/ErrorBoundary/ErrorBoundary';
 
 import Styles from './home.module.scss';
 
-const Home = props => {
+const Home = () => {
   const [selectedMovie, setSelectedMovie] = useState(null);
 
   const handleSelectedMovie = useCallback(movie => setSelectedMovie(movie), []);
   const handleCloseMovieInfo = useCallback(() => setSelectedMovie(null), []);
 
-  useEffect(async () => {
-    console.log(props);
+  const { movies } = useSelector(state => state.moviesData);
+  const dispatch = useDispatch();
 
-    const request = await fetch('http://localhost:4000/movies?offset=2&limit=20');
-    const response = await request.json();
-    console.log(response);
+  useEffect(async () => {
+    // console.log(props);
+    //
+    // const response = await moviesAPI.getMovies();
+    //
+    // console.log(response);
   });
 
   return (
     <ErrorBoundary>
-      <button
-        onClick={() => {
-          props.getMoviesList([1, 3, 4, 5]);
-        }}
-      >
-        SET MOVIE
-      </button>
-
       {selectedMovie ? (
         <MovieInfo data={selectedMovie} closeMovieInfo={handleCloseMovieInfo} />
       ) : (
@@ -50,12 +46,4 @@ const Home = props => {
   );
 };
 
-const mapStateToProps = store => ({
-  moviesData: store.moviesData,
-});
-
-const mapDispatchToProps = dispatch => ({
-  getMoviesList: movies => dispatch(Actions.getMoviesList(movies)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default Home;
