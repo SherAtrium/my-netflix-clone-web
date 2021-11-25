@@ -5,6 +5,7 @@ const loadMovies = () => async dispatch => {
   try {
     dispatch(getMoviesInProgress());
     const response = await moviesAPI.getMovies();
+    console.log('thunk', response);
     dispatch(getMoviesInSuccess(response.data));
   } catch (e) {
     throw new Error(e);

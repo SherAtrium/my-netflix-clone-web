@@ -1,8 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
-import { connect, useDispatch, useSelector } from 'react-redux';
 
-import { moviesAPI } from '../../Services/Api';
-import Actions from '../../Store/Actions/ActionCreators';
+import { useDispatch, useSelector } from 'react-redux';
+import { loadMovies } from '../../Store/Thunks';
 
 import Footer from '../../Components/Footer/Footer';
 import Header from '../../Components/Header/Header';
@@ -18,16 +17,14 @@ const Home = () => {
   const handleSelectedMovie = useCallback(movie => setSelectedMovie(movie), []);
   const handleCloseMovieInfo = useCallback(() => setSelectedMovie(null), []);
 
-  const { movies } = useSelector(state => state.moviesData);
+  const { movies, isLoading } = useSelector(state => state.moviesData);
   const dispatch = useDispatch();
 
-  useEffect(async () => {
-    // console.log(props);
-    //
-    // const response = await moviesAPI.getMovies();
-    //
-    // console.log(response);
-  });
+  console.log('MOVIES', movies);
+
+  useEffect(() => {
+    dispatch(loadMovies());
+  }, []);
 
   return (
     <ErrorBoundary>

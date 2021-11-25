@@ -2,13 +2,13 @@ import { GET_MOVIES_IN_SUCCESS, GET_MOVIES_IN_PROGRESS } from '../Actions/Action
 
 const initialState = {
   movies: [],
-  isLoading: false,
+  isLoading: true,
 };
 
 const MoviesReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_MOVIES_IN_PROGRESS:
-      return { ...state, isLoading: true };
+      return { ...state, isLoading: false };
 
     case GET_MOVIES_IN_SUCCESS:
       return { ...state, movies: action.payload };
