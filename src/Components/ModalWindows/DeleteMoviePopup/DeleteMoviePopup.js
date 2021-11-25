@@ -13,7 +13,7 @@ const DeleteMoviePopup = ({ isOpen = false, closeMethod = () => {} }) => {
       isAvailableCloseBtn
       popupSize={POPUP_SIZE.SMALL}
       title={Strings.popupTitle.deleteMovie}
-      closeMethod={() => closeMethod()}
+      closeMethod={closeMethod}
     >
       <div className={Styles.popupContent}>
         <p>{Strings.popupContent.confirmDelete}</p>

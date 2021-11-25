@@ -30,7 +30,7 @@ const EditMoviePopup = ({ isOpen = false, closeMethod = () => {}, movieData = {}
       isAvailableCloseBtn
       popupSize={POPUP_SIZE.LARGE}
       title={Strings.popupTitle.editMovie}
-      closeMethod={() => closeMethod()}
+      closeMethod={closeMethod}
     >
       <SetMovieForm movieData={MovieDataObject} />
     </Popup>

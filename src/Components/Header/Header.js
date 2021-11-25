@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import Logotype from '../Logotype/Logotype';
 
 import Strings from '../../Utils/Strings';
@@ -11,9 +11,11 @@ import AddMoviePopup from '../ModalWindows/AddMoviePopup/AddMoviePopup';
 const Header = () => {
   const [addMoviePopup, setAddMoviePopup] = useState(false);
 
+  const handleSetAddMoviePopup = useCallback(bool => setAddMoviePopup(bool), []);
+
   return (
     <>
-      <AddMoviePopup isOpen={addMoviePopup} closeMethod={setAddMoviePopup} />
+      <AddMoviePopup isOpen={addMoviePopup} closeMethod={() => handleSetAddMoviePopup(false)} />
 
       <header className={Styles.header}>
         <img src={headerImg} alt='Background collage' />
@@ -27,7 +29,7 @@ const Header = () => {
               btnStyle={BUTTON_STYLE.TRANSPARENT}
               btnSize={BUTTON_SIZE.MIDDLE}
               btnColor={BUTTON_COLOR.RED}
-              onClick={() => setAddMoviePopup(true)}
+              onClick={() => handleSetAddMoviePopup(true)}
               isDisable={false}
             >
               {Strings.buttons.addMovie}
