@@ -5,8 +5,10 @@ const loadMovies = () => async dispatch => {
   try {
     dispatch(getMoviesInProgress());
     const response = await moviesAPI.getMovies();
-    console.log('thunk', response);
-    dispatch(getMoviesInSuccess(response.data));
+
+    // TODO => The setTimeout implemented just for testing the loader...
+
+    setTimeout(() => dispatch(getMoviesInSuccess(response.data)), 512);
   } catch (e) {
     throw new Error(e);
   }

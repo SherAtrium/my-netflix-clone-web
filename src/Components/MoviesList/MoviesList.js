@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import classNames from 'classnames';
 import Loader from '../Loader/Loader';
 import MovieCard from './MovieCard/MovieCard';
 import MovieGenres from './MovieGenres/MovieGenres';
-import { getMovieGenres } from '../../Services/FakeApi';
 import { sortByName, sortByReleaseDate } from './helper';
 import MoviesListSort from './MoviesListSort/MoviesListSort';
 import {
@@ -21,12 +21,10 @@ import Styles from './MoviesList.module.scss';
 const findSelectedSort = data => data.filter(i => i.isSelected)[0];
 
 const MoviesList = ({ selectedMovie = () => {} }) => {
-  const [isLoading, setIsLoading] = useState(true);
+  const { movies, isLoading } = useSelector(state => state.moviesData);
 
   const [genres, setGenres] = useState(ALL_GENRES);
   const [selectedGenre, setSelectedGenre] = useState(genres[0]);
-
-  const [movieList, setMovieList] = useState([]);
 
   const [sortTypes, setSortTypes] = useState(AVAILABLE_TYPES_FOR_SORTING);
   const [selectedSortType, setSelectedSortType] = useState(findSelectedSort(sortTypes));
@@ -71,20 +69,7 @@ const MoviesList = ({ selectedMovie = () => {} }) => {
     setSelectedSortType(type);
   }, []);
 
-  useEffect(async () => {
-    setIsLoading(true);
-    setMovieList([]);
-
-    const response = await getMovieGenres();
-
-    setMovieList(
-      selectedGenre.label === Strings.movieGenres.all
-        ? sortingMovies(response.data)
-        : sortMoviesByGenre(sortingMovies(response.data)),
-    );
-
-    setIsLoading(false);
-  }, [genres, selectedSortType]);
+  console.log('->', isLoading);
 
   return (
     <>
@@ -96,9 +81,9 @@ const MoviesList = ({ selectedMovie = () => {} }) => {
       <Loader loading={isLoading} />
 
       <section className={classNames('container', Styles.movieCards)}>
-        {movieList.length === 0 && !isLoading && <p>There are no films in this genre yet</p>}
+        {movies.length === 0 && !isLoading && <p>There are no films in this genre yet</p>}
 
-        {movieList.map(i => (
+        {movies.map(i => (
           <MovieCard key={i.id} movieData={i} onSelectMovie={selectedMovie} />
         ))}
       </section>

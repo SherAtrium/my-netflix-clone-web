@@ -8,10 +8,10 @@ const initialState = {
 const MoviesReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_MOVIES_IN_PROGRESS:
-      return { ...state, isLoading: false };
+      return { ...state, isLoading: true };
 
     case GET_MOVIES_IN_SUCCESS:
-      return { ...state, movies: action.payload };
+      return { ...state, movies: action.payload, isLoading: false };
 
     default:
       return state;
