@@ -1,11 +1,12 @@
-import { useCallback, useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
+import { useCallback, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Loader from '../Loader/Loader';
 import MovieCard from './MovieCard/MovieCard';
 import MovieGenres from './MovieGenres/MovieGenres';
+import { loadMoviesByGenre } from '../../Store/Thunks';
 import { sortByName, sortByReleaseDate } from './helper';
 import MoviesListSort from './MoviesListSort/MoviesListSort';
 import {
@@ -15,24 +16,21 @@ import {
   AVAILABLE_TYPES_FOR_SORTING,
 } from '../../Utils/Constants';
 
-import Strings from '../../Utils/Strings';
 import Styles from './MoviesList.module.scss';
 
 const findSelectedSort = data => data.filter(i => i.isSelected)[0];
 
 const MoviesList = ({ selectedMovie = () => {} }) => {
+  const dispatch = useDispatch();
   const { movies, isLoading } = useSelector(state => state.moviesData);
 
   const [genres, setGenres] = useState(ALL_GENRES);
-  const [selectedGenre, setSelectedGenre] = useState(genres[0]);
 
   const [sortTypes, setSortTypes] = useState(AVAILABLE_TYPES_FOR_SORTING);
   const [selectedSortType, setSelectedSortType] = useState(findSelectedSort(sortTypes));
 
-  const findSelectedGenre = id => genres.find(i => i.id === id);
-
-  const onSelectGenre = useCallback(id => {
-    setSelectedGenre(findSelectedGenre(id));
+  const onSelectGenre = useCallback((id, label) => {
+    dispatch(loadMoviesByGenre(label.toLowerCase()));
 
     setGenres(prevState => {
       return prevState.map(item => ({
@@ -56,7 +54,7 @@ const MoviesList = ({ selectedMovie = () => {} }) => {
   };
 
   const sortMoviesByGenre = list => {
-    return list.filter(movie => movie.genres.includes(selectedGenre.label));
+    // return list.filter(movie => movie.genres.includes(selectedGenre.label));
   };
 
   const onSortTypeClick = useCallback(type => {
@@ -68,8 +66,6 @@ const MoviesList = ({ selectedMovie = () => {} }) => {
     });
     setSelectedSortType(type);
   }, []);
-
-  console.log('->', isLoading);
 
   return (
     <>

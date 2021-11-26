@@ -6,13 +6,13 @@ import Styles from './MovieGenres.module.scss';
 const MovieGenres = ({ genres = [], onSelectGenre = () => {} }) => {
   return (
     <ul className={Styles.genreList}>
-      {genres.map(genre => (
+      {genres.map(({ id, label, isActive }) => (
         <li
-          key={genre.id}
-          onClick={() => onSelectGenre(genre.id)}
-          className={classNames({ [`${Styles.isActive}`]: genre.isActive })}
+          key={id}
+          onClick={() => onSelectGenre(id, label)}
+          className={classNames({ [`${Styles.isActive}`]: isActive })}
         >
-          {genre.label}
+          {label}
         </li>
       ))}
     </ul>

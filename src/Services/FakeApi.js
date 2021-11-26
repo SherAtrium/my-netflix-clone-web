@@ -1,5 +1,7 @@
 import FakeApiData from './FakeApiData.json';
 
+// TODO this file will be removed...
+
 export const getMovieGenres = () => {
   return new Promise(resolve => {
     const partOfMovies = FakeApiData.data.filter((item, idx) => idx < 10);

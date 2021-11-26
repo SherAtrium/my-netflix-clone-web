@@ -8,6 +8,10 @@ const moviesAPI = {
   getMovies() {
     return instance.get('movies').then(response => response.data);
   },
+
+  getMoviesByGenre(genre) {
+    return instance.get(`movies?filter=${genre}`).then(response => response.data);
+  },
 };
 
 export { moviesAPI };

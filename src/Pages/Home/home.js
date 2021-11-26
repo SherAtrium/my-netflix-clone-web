@@ -20,8 +20,6 @@ const Home = () => {
   const { movies, isLoading } = useSelector(state => state.moviesData);
   const dispatch = useDispatch();
 
-  console.log('MOVIES', movies);
-
   useEffect(() => {
     dispatch(loadMovies());
   }, []);
