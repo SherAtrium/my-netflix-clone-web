@@ -5,32 +5,28 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Loader from '../Loader/Loader';
 import MovieCard from './MovieCard/MovieCard';
+import { loadMovies } from '../../Store/Thunks';
 import MovieGenres from './MovieGenres/MovieGenres';
-import { loadMoviesByGenre } from '../../Store/Thunks';
-import { sortByName, sortByReleaseDate } from './helper';
 import MoviesListSort from './MoviesListSort/MoviesListSort';
-import {
-  ALL_GENRES,
-  SORT_BY_NAME,
-  SORT_BY_RELEASE_DATE,
-  AVAILABLE_TYPES_FOR_SORTING,
-} from '../../Utils/Constants';
+import { ALL_GENRES, AVAILABLE_TYPES_FOR_SORTING } from '../../Utils/Constants';
 
+import Strings from '../../Utils/Strings';
 import Styles from './MoviesList.module.scss';
-
-const findSelectedSort = data => data.filter(i => i.isSelected)[0];
 
 const MoviesList = ({ selectedMovie = () => {} }) => {
   const dispatch = useDispatch();
   const { movies, isLoading } = useSelector(state => state.moviesData);
 
-  const [genres, setGenres] = useState(ALL_GENRES);
+  const [genres, setGenres] = useState([...ALL_GENRES]);
 
-  const [sortTypes, setSortTypes] = useState(AVAILABLE_TYPES_FOR_SORTING);
-  const [selectedSortType, setSelectedSortType] = useState(findSelectedSort(sortTypes));
+  const [sortTypes, setSortTypes] = useState([...AVAILABLE_TYPES_FOR_SORTING]);
 
   const onSelectGenre = useCallback((id, label) => {
-    dispatch(loadMoviesByGenre(label.toLowerCase()));
+    dispatch(
+      loadMovies({
+        filter: label !== Strings.movieGenres.all ? label.toLowerCase() : '',
+      }),
+    );
 
     setGenres(prevState => {
       return prevState.map(item => ({
@@ -40,32 +36,26 @@ const MoviesList = ({ selectedMovie = () => {} }) => {
     });
   }, []);
 
-  const sortingMovies = data => {
-    switch (selectedSortType.label) {
-      case SORT_BY_RELEASE_DATE:
-        return sortByReleaseDate(data);
+  const onSortTypeClick = useCallback(
+    type => {
+      const { label } = genres.find(i => i.isActive);
 
-      case SORT_BY_NAME:
-        return sortByName(data);
+      dispatch(
+        loadMovies({
+          sortBy: type?.query,
+          filter: label !== Strings.movieGenres.all ? label.toLowerCase() : '',
+        }),
+      );
 
-      default:
-        return data;
-    }
-  };
-
-  const sortMoviesByGenre = list => {
-    // return list.filter(movie => movie.genres.includes(selectedGenre.label));
-  };
-
-  const onSortTypeClick = useCallback(type => {
-    setSortTypes(prevState => {
-      return prevState.map(item => ({
-        ...item,
-        isSelected: item.id === type.id,
-      }));
-    });
-    setSelectedSortType(type);
-  }, []);
+      setSortTypes(prevState => {
+        return prevState.map(item => ({
+          ...item,
+          isSelected: item.query === type.query,
+        }));
+      });
+    },
+    [genres],
+  );
 
   return (
     <>

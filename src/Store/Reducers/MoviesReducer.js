@@ -1,4 +1,8 @@
-import { GET_MOVIES_IN_SUCCESS, GET_MOVIES_IN_PROGRESS } from '../Actions/ActionTypes';
+import {
+  BEFORE_TO_GET_MOVIES,
+  GET_MOVIES_IN_SUCCESS,
+  GET_MOVIES_IN_PROGRESS,
+} from '../Actions/ActionTypes';
 
 const initialState = {
   movies: [],
@@ -7,6 +11,9 @@ const initialState = {
 
 const MoviesReducer = (state = initialState, action) => {
   switch (action.type) {
+    case BEFORE_TO_GET_MOVIES:
+      return { ...state, movies: [] };
+
     case GET_MOVIES_IN_PROGRESS:
       return { ...state, isLoading: true };
 

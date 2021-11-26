@@ -34,7 +34,7 @@ const MoviesListSort = ({ sortTypes = [], onSortTypeClick = () => {} }) => {
         {visible && (
           <ul className={Styles.sortList}>
             {sortTypes.map(type => (
-              <li key={type.id} onClick={() => onSortTypeClick(type)}>
+              <li key={type.query} onClick={() => onSortTypeClick(type)}>
                 {type.label}
               </li>
             ))}

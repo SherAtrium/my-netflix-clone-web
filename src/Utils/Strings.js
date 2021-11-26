@@ -53,8 +53,21 @@ export default {
   },
   movieListSorting: {
     sortBy: 'Sort by',
+    title: 'Title',
     releaseDate: 'Release Date',
-    name: 'Name',
+    rate: 'Rate',
+    budget: 'Budget',
+    revenue: 'Revenue',
+    runtime: 'Runtime',
+
+    queries: {
+      title: 'title',
+      releaseDate: 'release_date',
+      rate: 'vote_average',
+      budget: 'budget',
+      revenue: 'revenue',
+      runtime: 'runtime',
+    },
   },
   popupTitle: {
     addMovie: 'Add Movie',

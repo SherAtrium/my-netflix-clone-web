@@ -20,7 +20,7 @@
 		width: 100%;
 		height: 100%;
 
-		opacity: 0.3;
+		opacity: 0.2;
 		object-fit: cover;
 
 		filter: blur(4px);
@@ -72,21 +72,14 @@
 	}
 }
 
-// TODO TEST
-.aa {
-	display: flex;
-	flex-direction: column;
-	padding: 0 10rem;
-}
-
 @keyframes bg-fade-out {
 	0% {
-		opacity: .5;
+		opacity: .3;
 		transform: scale(2);
 		filter: blur(1px);
 	}
 	100% {
-		opacity: .3;
+		opacity: .2;
 		transform: scale(1);
 		filter: blur(4px);
 	}

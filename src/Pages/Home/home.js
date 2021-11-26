@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { loadMovies } from '../../Store/Thunks';
 
 import Footer from '../../Components/Footer/Footer';
@@ -17,11 +17,10 @@ const Home = () => {
   const handleSelectedMovie = useCallback(movie => setSelectedMovie(movie), []);
   const handleCloseMovieInfo = useCallback(() => setSelectedMovie(null), []);
 
-  const { movies, isLoading } = useSelector(state => state.moviesData);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(loadMovies());
+    dispatch(loadMovies({}));
   }, []);
 
   return (
