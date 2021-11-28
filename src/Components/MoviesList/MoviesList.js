@@ -15,8 +15,7 @@ import Styles from './MoviesList.module.scss';
 
 const MoviesList = ({ selectedMovie = () => {} }) => {
   const dispatch = useDispatch();
-
-  const { movies, isLoading, moviesRequestBody } = useSelector(state => state.moviesData);
+  const { movies, isLoading, moviesRequestBody } = useSelector(store => store.moviesData);
 
   const [genres, setGenres] = useState([...ALL_GENRES]);
 

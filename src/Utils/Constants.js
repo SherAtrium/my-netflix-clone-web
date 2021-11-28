@@ -1,13 +1,18 @@
 import Strings from './Strings';
 
-export const DEFAULT_SORT_TYPE_LABEL = Strings.movieListSorting.title;
-export const DEFAULT_SORT_TYPE_QUERY = Strings.movieListSorting.queries.title;
+export const DEFAULT_SORT_TYPE_LABEL = Strings.movieListSorting.releaseDate;
+export const DEFAULT_SORT_TYPE_QUERY = Strings.movieListSorting.queries.releaseDate;
 
 export const MOVIES_SORT_ORDER_ASC = 'asc';
 export const MOVIES_SORT_ORDER_DESC = 'desc';
 
+export const MOVIES_SEARCH_BY_TITLE = 'title';
+export const MOVIES_SEARCH_BY_GENRE = 'genre';
+
 export const MOVIES_PAGE_OFFSET = 1;
-export const MOVIES_PAGE_LIMIT = 15;
+export const MOVIES_PAGE_LIMIT = 30;
+
+export const DEFAULT_SEARCH_ESTIMATE_TIME = 256;
 
 export const AVAILABLE_TYPES_FOR_SORTING = [
   {
@@ -16,8 +21,8 @@ export const AVAILABLE_TYPES_FOR_SORTING = [
     isSelected: true,
   },
   {
-    label: Strings.movieListSorting.releaseDate,
-    query: Strings.movieListSorting.queries.releaseDate,
+    label: Strings.movieListSorting.title,
+    query: Strings.movieListSorting.queries.title,
     isSelected: false,
   },
   {

@@ -1,17 +1,40 @@
 import { useCallback, useState } from 'react';
-import Logotype from '../Logotype/Logotype';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Strings from '../../Utils/Strings';
+import Logotype from '../Logotype/Logotype';
 import headerImg from '../../Resources/HeaderBG.png';
+import AddMoviePopup from '../ModalWindows/AddMoviePopup/AddMoviePopup';
 import { Button, BUTTON_COLOR, BUTTON_SIZE, BUTTON_STYLE } from '../Button/Button';
 
 import Styles from './Header.module.scss';
-import AddMoviePopup from '../ModalWindows/AddMoviePopup/AddMoviePopup';
+import { loadMovies } from '../../Store/Thunks';
+import { DEFAULT_SEARCH_ESTIMATE_TIME } from '../../Utils/Constants';
 
 const Header = () => {
+  const dispatch = useDispatch();
+  const { moviesRequestBody } = useSelector(store => store.moviesData);
+
+  const [searchValue, setSearchValue] = useState('');
   const [addMoviePopup, setAddMoviePopup] = useState(false);
 
   const handleSetAddMoviePopup = useCallback(bool => setAddMoviePopup(bool), []);
+
+  let _timer;
+
+  const onSearchType = useCallback(
+    ({ target }) => {
+      clearTimeout(_timer);
+
+      const value = target.value.trim();
+      setSearchValue(value);
+
+      _timer = setTimeout(() => {
+        dispatch(loadMovies({ ...moviesRequestBody, search: value }));
+      }, DEFAULT_SEARCH_ESTIMATE_TIME);
+    },
+    [_timer],
+  );
 
   return (
     <>
@@ -40,7 +63,12 @@ const Header = () => {
             <h3>{Strings.inputs.searchBar.title}</h3>
 
             <div className={Styles.inputContainer}>
-              <input type='text' placeholder={Strings.inputs.searchBar.placeholder} />
+              <input
+                type='text'
+                placeholder={Strings.inputs.searchBar.placeholder}
+                value={searchValue}
+                onChange={onSearchType}
+              />
 
               <Button
                 tooltip={Strings.buttons.search}

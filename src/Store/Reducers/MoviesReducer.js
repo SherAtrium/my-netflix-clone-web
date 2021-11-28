@@ -5,10 +5,11 @@ import {
 } from '../Actions/ActionTypes';
 
 import {
-  DEFAULT_SORT_TYPE_QUERY,
   MOVIES_PAGE_LIMIT,
   MOVIES_PAGE_OFFSET,
   MOVIES_SORT_ORDER_ASC,
+  MOVIES_SEARCH_BY_TITLE,
+  DEFAULT_SORT_TYPE_QUERY,
 } from '../../Utils/Constants';
 
 const initialState = {
@@ -17,10 +18,10 @@ const initialState = {
   moviesRequestBody: {
     filter: '',
     search: '',
-    searchBy: '',
     limit: MOVIES_PAGE_LIMIT,
     offset: MOVIES_PAGE_OFFSET,
     sortBy: DEFAULT_SORT_TYPE_QUERY,
+    searchBy: MOVIES_SEARCH_BY_TITLE,
     sortOrder: MOVIES_SORT_ORDER_ASC,
   },
 };
