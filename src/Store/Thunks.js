@@ -10,7 +10,7 @@ import {
 const loadMovies = body => async dispatch => {
   try {
     dispatch(beforeToGetMovies([]));
-    dispatch(getMoviesInProgress());
+    dispatch(getMoviesInProgress(body));
 
     const response = await moviesAPI.getMovies(body);
     setTimeout(() => dispatch(getMoviesInSuccess(response.data)), 512);

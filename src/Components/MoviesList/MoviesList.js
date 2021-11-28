@@ -15,18 +15,16 @@ import Styles from './MoviesList.module.scss';
 
 const MoviesList = ({ selectedMovie = () => {} }) => {
   const dispatch = useDispatch();
-  const { movies, isLoading } = useSelector(state => state.moviesData);
+
+  const { movies, isLoading, moviesRequestBody } = useSelector(state => state.moviesData);
 
   const [genres, setGenres] = useState([...ALL_GENRES]);
 
   const [sortTypes, setSortTypes] = useState([...AVAILABLE_TYPES_FOR_SORTING]);
 
   const onSelectGenre = useCallback((id, label) => {
-    dispatch(
-      loadMovies({
-        filter: label !== Strings.movieGenres.all ? label.toLowerCase() : '',
-      }),
-    );
+    const genre = label !== Strings.movieGenres.all ? label.toLowerCase() : '';
+    dispatch(loadMovies({ ...moviesRequestBody, filter: genre }));
 
     setGenres(prevState => {
       return prevState.map(item => ({
@@ -38,14 +36,7 @@ const MoviesList = ({ selectedMovie = () => {} }) => {
 
   const onSortTypeClick = useCallback(
     type => {
-      const { label } = genres.find(i => i.isActive);
-
-      dispatch(
-        loadMovies({
-          sortBy: type?.query,
-          filter: label !== Strings.movieGenres.all ? label.toLowerCase() : '',
-        }),
-      );
+      dispatch(loadMovies({ ...moviesRequestBody, sortBy: type.query }));
 
       setSortTypes(prevState => {
         return prevState.map(item => ({

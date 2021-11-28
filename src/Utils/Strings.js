@@ -49,7 +49,7 @@ export default {
     documentary: 'Documentary',
     comedy: 'Comedy',
     horror: 'Horror',
-    crime: 'Crime ',
+    crime: 'Crime',
   },
   movieListSorting: {
     sortBy: 'Sort by',
