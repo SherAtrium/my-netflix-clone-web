@@ -5,7 +5,7 @@ import {
   beforeToGetMovies,
 } from './Actions/ActionCreators';
 
-// TODO: setTimeout implemented to test the loader, cause the response from API comes in 1-3ms.
+// TODO: setTimeout implemented to test the loader, cause the response from API comes in 1-2ms.
 
 const loadMovies = body => async dispatch => {
   try {

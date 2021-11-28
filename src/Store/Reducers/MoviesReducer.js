@@ -7,8 +7,8 @@ import {
 import {
   MOVIES_PAGE_LIMIT,
   MOVIES_PAGE_OFFSET,
-  MOVIES_SORT_ORDER_ASC,
   MOVIES_SEARCH_BY_TITLE,
+  MOVIES_SORT_ORDER_DESC,
   DEFAULT_SORT_TYPE_QUERY,
 } from '../../Utils/Constants';
 
@@ -22,7 +22,7 @@ const initialState = {
     offset: MOVIES_PAGE_OFFSET,
     sortBy: DEFAULT_SORT_TYPE_QUERY,
     searchBy: MOVIES_SEARCH_BY_TITLE,
-    sortOrder: MOVIES_SORT_ORDER_ASC,
+    sortOrder: MOVIES_SORT_ORDER_DESC,
   },
 };
 
