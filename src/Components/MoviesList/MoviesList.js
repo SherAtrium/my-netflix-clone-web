@@ -1,40 +1,29 @@
-import { useCallback, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
+import { useCallback, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Loader from '../Loader/Loader';
 import MovieCard from './MovieCard/MovieCard';
+import { loadMovies } from '../../Store/Thunks';
 import MovieGenres from './MovieGenres/MovieGenres';
-import { getMovieGenres } from '../../Services/FakeApi';
-import { sortByName, sortByReleaseDate } from './helper';
 import MoviesListSort from './MoviesListSort/MoviesListSort';
-import {
-  ALL_GENRES,
-  SORT_BY_NAME,
-  SORT_BY_RELEASE_DATE,
-  AVAILABLE_TYPES_FOR_SORTING,
-} from '../../Utils/Constants';
+import { ALL_GENRES, AVAILABLE_TYPES_FOR_SORTING } from '../../Utils/Constants';
 
 import Strings from '../../Utils/Strings';
 import Styles from './MoviesList.module.scss';
 
-const findSelectedSort = data => data.filter(i => i.isSelected)[0];
+const MoviesList = ({ selectedMovie = () => {} }) => {
+  const dispatch = useDispatch();
+  const { movies, isLoading, moviesRequestBody } = useSelector(store => store.moviesData);
 
-const MoviesList = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [genres, setGenres] = useState([...ALL_GENRES]);
 
-  const [genres, setGenres] = useState(ALL_GENRES);
-  const [selectedGenre, setSelectedGenre] = useState(genres[0]);
+  const [sortTypes, setSortTypes] = useState([...AVAILABLE_TYPES_FOR_SORTING]);
 
-  const [movieList, setMovieList] = useState([]);
-
-  const [sortTypes, setSortTypes] = useState(AVAILABLE_TYPES_FOR_SORTING);
-  const [selectedSortType, setSelectedSortType] = useState(findSelectedSort(sortTypes));
-
-  const findSelectedGenre = id => genres.find(i => i.id === id);
-
-  const onSelectGenre = useCallback(id => {
-    setSelectedGenre(findSelectedGenre(id));
+  const onSelectGenre = useCallback((id, label) => {
+    const genre = label !== Strings.movieGenres.all ? label.toLowerCase() : '';
+    dispatch(loadMovies({ ...moviesRequestBody, filter: genre }));
 
     setGenres(prevState => {
       return prevState.map(item => ({
@@ -44,47 +33,19 @@ const MoviesList = () => {
     });
   }, []);
 
-  const sortingMovies = data => {
-    switch (selectedSortType.label) {
-      case SORT_BY_RELEASE_DATE:
-        return sortByReleaseDate(data);
+  const onSortTypeClick = useCallback(
+    type => {
+      dispatch(loadMovies({ ...moviesRequestBody, sortBy: type.query }));
 
-      case SORT_BY_NAME:
-        return sortByName(data);
-
-      default:
-        return data;
-    }
-  };
-
-  const sortMoviesByGenre = list => {
-    return list.filter(movie => movie.genres.includes(selectedGenre.label));
-  };
-
-  const onSortTypeClick = useCallback(type => {
-    setSortTypes(prevState => {
-      return prevState.map(item => ({
-        ...item,
-        isSelected: item.id === type.id,
-      }));
-    });
-    setSelectedSortType(type);
-  }, []);
-
-  useEffect(async () => {
-    setIsLoading(true);
-    setMovieList([]);
-
-    const response = await getMovieGenres();
-
-    setMovieList(
-      selectedGenre.label === Strings.movieGenres.all
-        ? sortingMovies(response.data)
-        : sortMoviesByGenre(sortingMovies(response.data)),
-    );
-
-    setIsLoading(false);
-  }, [genres, selectedSortType]);
+      setSortTypes(prevState => {
+        return prevState.map(item => ({
+          ...item,
+          isSelected: item.query === type.query,
+        }));
+      });
+    },
+    [genres],
+  );
 
   return (
     <>
@@ -96,14 +57,18 @@ const MoviesList = () => {
       <Loader loading={isLoading} />
 
       <section className={classNames('container', Styles.movieCards)}>
-        {movieList.length === 0 && !isLoading && <p>There are no films in this genre yet</p>}
+        {movies.length === 0 && !isLoading && <p>There are no films in this genre yet</p>}
 
-        {movieList.map(i => (
-          <MovieCard key={i.id} movieData={i} />
+        {movies.map(i => (
+          <MovieCard key={i.id} movieData={i} onSelectMovie={selectedMovie} />
         ))}
       </section>
     </>
   );
+};
+
+MoviesList.propTypes = {
+  selectedMovie: PropTypes.func,
 };
 
 export default MoviesList;

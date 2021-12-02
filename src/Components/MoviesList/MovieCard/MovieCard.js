@@ -14,7 +14,7 @@ const options = [
   { id: 'df90d', label: Strings.movieOptions.delete },
 ];
 
-const MovieCard = ({ movieData = {} }) => {
+const MovieCard = ({ movieData = {}, onSelectMovie = () => {} }) => {
   const optionsRef = useRef();
   const [editMoviePopup, setEditMoviePopup] = useState(false);
   const [visible, toggleVisible, setVisible] = useToggle(false);
@@ -38,7 +38,7 @@ const MovieCard = ({ movieData = {} }) => {
   }, []);
 
   return (
-    <div className={Styles.movie}>
+    <div className={Styles.movie} onClick={() => onSelectMovie(movieData)}>
       <EditMoviePopup
         isOpen={editMoviePopup}
         closeMethod={() => handleSetEditMoviePopup(false)}
@@ -53,7 +53,10 @@ const MovieCard = ({ movieData = {} }) => {
       <div
         className={classNames(Styles.options, { [`${Styles.isFocused}`]: visible })}
         ref={optionsRef}
-        onClick={toggleVisible}
+        onClick={e => {
+          e.stopPropagation();
+          toggleVisible();
+        }}
       >
         <span className={Styles.dot}>&bull;</span>
         <span className={Styles.dot}>&bull;</span>
@@ -88,6 +91,7 @@ const MovieCard = ({ movieData = {} }) => {
 
 MovieCard.propTypes = {
   movieData: PropTypes.object,
+  onSelectMovie: PropTypes.func,
 };
 
 export default MovieCard;
