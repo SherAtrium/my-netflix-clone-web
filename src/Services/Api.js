@@ -5,19 +5,11 @@ const instance = axios.create({
 });
 
 const moviesAPI = {
-  getMovies({
-    limit = '',
-    filter = '',
-    offset = '',
-    search = '',
-    sortBy = '',
-    searchBy = '',
-    sortOrder = '',
-  }) {
+  getMovies(body) {
     return instance
-      .get(
-        `movies?sortBy=${sortBy}&sortOrder=${sortOrder}&search=${search}&searchBy=${searchBy}&filter=${filter}&offset=${offset}&limit=${limit}`,
-      )
+      .get('movies', {
+        params: { ...body },
+      })
       .then(response => response.data);
   },
 };

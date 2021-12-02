@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import {useCallback, useRef, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Strings from '../../Utils/Strings';
@@ -20,16 +20,16 @@ const Header = () => {
 
   const handleSetAddMoviePopup = useCallback(bool => setAddMoviePopup(bool), []);
 
-  let _timer;
+  const _timer = useRef();
 
   const onSearchType = useCallback(
     ({ target }) => {
-      clearTimeout(_timer);
+      clearTimeout(_timer.current);
 
       const value = target.value.trim();
       setSearchValue(value);
 
-      _timer = setTimeout(() => {
+      _timer.current = setTimeout(() => {
         dispatch(loadMovies({ ...moviesRequestBody, search: value }));
       }, DEFAULT_SEARCH_ESTIMATE_TIME);
     },
