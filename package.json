@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack serve -c config/webpack/development.js",
-    "build": "webpack -c config/webpack/production.js"
+    "build": "webpack -c config/webpack/production.js",
+    "test": "jest --env=jsdom",
+    "updateSnapshots": "jest --updateSnapshot"
   },
   "repository": {
     "type": "git",
@@ -25,6 +27,7 @@
     "@babel/plugin-transform-runtime": "^7.15.0",
     "@babel/preset-env": "^7.15.0",
     "@babel/preset-react": "^7.14.5",
+    "@testing-library/react": "^12.1.2",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.2.2",
     "css-loader": "^6.2.0",
@@ -40,12 +43,15 @@
     "html-loader": "^2.1.2",
     "html-webpack-plugin": "^5.3.2",
     "imagemin-webpack-plugin": "^2.4.2",
+    "jest": "^27.4.3",
     "mini-css-extract-plugin": "^2.3.0",
     "postcss": "^8.3.6",
     "postcss-loader": "^6.1.1",
     "postcss-preset-env": "^6.7.0",
     "prettier": "^2.4.1",
     "react-dev-utils": "^11.0.4",
+    "react-test-renderer": "^17.0.2",
+    "redux-mock-store": "^1.5.4",
     "sass": "^1.41.1",
     "sass-loader": "^12.1.0",
     "style-loader": "^3.2.1",
