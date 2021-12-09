@@ -8,7 +8,6 @@ const { merge } = require('webpack-merge');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const paths = require('../paths');
 const { default: ImageminPlugin } = require('imagemin-webpack-plugin');
 
 const EXT_IMAGES = /\.(jpe?g|png|gif|svg)$/i;
